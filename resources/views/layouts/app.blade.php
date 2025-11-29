@@ -45,6 +45,7 @@
   @include('components.alert')
   @include('partials.header')
   @include('partials.sidebar')
+  <x-confirm-delete />
     
 
     
@@ -54,38 +55,91 @@
     @stack('scripts')
     <script>
     function openModal(id) {
-      const modal = document.getElementById(id);
-      const card = modal.querySelector('.bg-white');
+    const modal = document.getElementById(id);
+    const card = modal.querySelector('.bg-white');
 
-      modal.classList.remove('hidden');
-      void modal.offsetWidth;
-      modal.classList.remove('opacity-0');
+    modal.classList.remove('hidden');
+    void modal.offsetWidth; // Trigger reflow
+    modal.classList.remove('opacity-0');
+    
+    card.classList.remove('scale-95');
+    card.classList.add('scale-100');
 
-        card.classList.remove('scale-95');
-        card.classList.add('scale-100');
+    document.body.style.overflow = 'hidden';
+}
 
-        document.body.style.overflow = 'hidden';
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    const card = modal.querySelector('.bg-white');
+
+    modal.classList.add('opacity-0');
+    card.classList.remove('scale-100');
+    card.classList.add('scale-95');
+
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+
+        // Clear errors dan reset form
+        clearFormErrors(id);
+        resetForm(id);
+        
+    }, 300);
+}
+
+// Fungsi khusus untuk reset form
+function resetForm(modalId) {
+    const modal = document.getElementById(modalId);
+    const form = modal.querySelector("form");
+    
+    if (form) {
+        form.reset(); // Ini sudah cukup untuk reset semua input
     }
+}
 
-    function closeModal(id) {
-        const modal = document.getElementById(id);
-        const card = modal.querySelector('.bg-white');
-
-        modal.classList.add('opacity-0');
-        card.classList.remove('scale-100');
-        card.classList.add('scale-95');
-
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('closeModal')) {
-            closeModal(e.target.dataset.id);
-        }
+// Fungsi clear errors (tetap sama)
+function clearFormErrors(modalId) {
+    const modal = document.getElementById(modalId);
+    
+    // Hapus pesan error
+    modal.querySelectorAll('.text-red-500').forEach(el => el.remove());
+    
+    // Hapus border merah
+    modal.querySelectorAll('.border-red-500').forEach(el => {
+        el.classList.remove('border-red-500');
     });
+}
+
+// Event Listeners yang Lebih Spesifik
+document.addEventListener('click', (e) => {
+    // Handle close button
+    if (e.target.closest('.closeModal')) {
+        const closeBtn = e.target.closest('.closeModal');
+        closeModal(closeBtn.dataset.id);
+    }
+    
+    // Handle klik di luar modal (overlay)
+    if (e.target.classList.contains('fixed') && 
+        e.target.classList.contains('inset-0') && 
+        e.target.classList.contains('bg-black')) {
+        const modals = document.querySelectorAll('.fixed.inset-0.bg-black');
+        modals.forEach(modal => {
+            if (!modal.classList.contains('hidden')) {
+                closeModal(modal.id);
+            }
+        });
+    }
+});
+
+// Juga handle tombol "Batal" secara spesifik
+document.addEventListener('click', (e) => {
+    if (e.target.type === 'button' && e.target.textContent.trim() === 'Batal') {
+        const modal = e.target.closest('.fixed.inset-0');
+        if (modal) {
+            closeModal(modal.id);
+        }
+    }
+});
 
    
 

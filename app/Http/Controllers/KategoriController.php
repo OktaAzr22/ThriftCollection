@@ -76,11 +76,7 @@ public function update(Request $request, Kategori $kategori)
         try {
             $kategori->delete();
 
-            return redirect()->back()->with('alert', [
-                'type'    => 'info',
-                'message' => 'Kategori berhasil dihapus!',
-                'timeout' => 3500,
-            ]);
+            return redirect()->back()->with('success', 'Kategori berhasil dihapus.');
         } catch (QueryException $e) {
             return redirect()->back()->with('alert', [
                 'type'    => 'error',

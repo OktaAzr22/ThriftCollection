@@ -16,8 +16,10 @@
         <!-- HEADER -->
         <div class="flex justify-between items-center p-6 border-b">
             <h3 class="text-lg font-semibold text-gray-900">{{ $title }}</h3>
-            <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200 closeModal"
-                    data-id="{{ $id }}">
+            <button type="button" 
+                    class="text-gray-400 hover:text-gray-600 transition-colors duration-200 closeModal"
+                    data-id="{{ $id }}"
+                    aria-label="Tutup modal">
                 <i class="fas fa-times text-xl"></i>
             </button>
         </div>
@@ -34,8 +36,8 @@
 
             <div class="flex justify-end space-x-3 mt-6">
                 <button type="button"
-                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
-                        onclick="closeModal('{{ $id }}')">
+                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition closeModal"
+                        data-id="{{ $id }}">
                     Batal
                 </button>
 

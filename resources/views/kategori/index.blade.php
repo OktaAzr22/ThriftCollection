@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<x-confirm-delete />
+
 <div class="bg-white rounded-lg shadow p-6">
 
     {{-- Header --}}
@@ -47,16 +49,16 @@
                                 Edit
                             </button>
 
-                            {{-- DELETE --}}
-                            <form action="{{ route('kategori.destroy', $row) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Yakin ingin menghapus kategori ini?')"
-                                    class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
-                                    Hapus
-                                </button>
-                            </form>
+                          <button 
+                              onclick="openDeleteModal(
+                                  '{{ route('kategori.destroy', $row->id) }}', 
+                                  'kategori', 
+                                  '{{ $row->nama }}'
+                              )"
+                              class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
+                              Hapus
+                          </button>
+
 
                         </div>
                     </td>

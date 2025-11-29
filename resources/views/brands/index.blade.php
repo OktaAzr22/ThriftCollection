@@ -66,15 +66,18 @@
                                             </button>
                                           </a>
 
-                                          <form action="{{ route('brands.destroy', $brand->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin hapus brand?')">
-                                              @csrf
-                                              @method('DELETE')
-                                              <button class="p-2 hover:bg-red-100 text-red-600 rounded-md">
-                                                  <i class="fas fa-trash"></i>
-                                              </button>
-                                          </form>
+                                          <button 
+                                                onclick="openDeleteModal(
+                                                    '{{ route('brands.destroy', $brand->id) }}', 
+                                                    'BRAND', 
+                                                    '{{ $brand->name }}'
+                                                )"
+                                                class="p-2 hover:bg-red-100 text-red-600 rounded-md">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+
+
+                                          
 
                                             
 
