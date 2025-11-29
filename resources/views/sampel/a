@@ -1,0 +1,236 @@
+<!-- Modal Tambah Brand -->
+<div id="tambahBrandModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden transition-opacity duration-300 ease-in-out opacity-0">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4 transform transition-all duration-300 scale-95">
+        <div class="flex justify-between items-center p-6 border-b">
+            <h3 class="text-lg font-semibold text-gray-900">Tambah Brand Baru</h3>
+            <button id="closeBrandModal" class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <form id="formTambahBrand" class="p-6" action="{{ route('brands.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-4">
+                <label for="namaBrand" class="block text-sm font-medium text-gray-700 mb-2">Nama Brand</label>
+                <input type="text" id="namaBrand" name="nama_brand" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan nama brand" required>
+                @error('nama_brand')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="asalBrand" class="block text-sm font-medium text-gray-700 mb-2">Asal Brand</label>
+                <input type="text" id="asalBrand" name="asal_brand" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan asal brand" required>
+                @error('asal_brand')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="gambarBrand" class="block text-sm font-medium text-gray-700 mb-2">Gambar Brand</label>
+                <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:border-primary transition-colors duration-200" id="imageUploadArea">
+                    <div id="imagePreview" class="text-center">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
+                        <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                    </div>
+                </div>
+                <input type="file" id="gambarBrand" name="gambar_brand" class="hidden" accept="image/*">
+                @error('gambar_brand')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+                <button type="button" id="deleteImage" class="mt-2 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 opacity-0 hidden">
+                    <i class="fas fa-trash mr-1"></i> Hapus Gambar
+                </button>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+                <button type="button" id="batalBrandBtn" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    Batal
+                </button>
+                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Modal untuk tambah brand
+    const brandModal = document.getElementById('tambahBrandModal');
+    const openBrandModalBtn = document.getElementById('tambahBrandBtn');
+    const closeBrandModalBtn = document.getElementById('closeBrandModal');
+    const batalBrandBtn = document.getElementById('batalBrandBtn');
+    const brandForm = document.getElementById('formTambahBrand');
+    const imageUploadArea = document.getElementById('imageUploadArea');
+    const imageInput = document.getElementById('gambarBrand');
+    const imagePreview = document.getElementById('imagePreview');
+    const deleteImageBtn = document.getElementById('deleteImage');
+
+    // Fungsi untuk membuka modal brand dengan animasi
+    function openBrandModal() {
+        brandModal.classList.remove('hidden');
+        // Trigger reflow untuk memastikan animasi berjalan
+        void brandModal.offsetWidth;
+        brandModal.classList.remove('opacity-0');
+        brandModal.querySelector('.bg-white').classList.remove('scale-95');
+        brandModal.querySelector('.bg-white').classList.add('scale-100');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk menutup modal brand dengan animasi
+    function closeBrandModal() {
+        brandModal.classList.add('opacity-0');
+        brandModal.querySelector('.bg-white').classList.remove('scale-100');
+        brandModal.querySelector('.bg-white').classList.add('scale-95');
+        
+        setTimeout(() => {
+            brandModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            brandForm.reset();
+            resetImagePreview();
+        }, 300);
+    }
+
+    // Event listener untuk membuka modal brand
+    if (openBrandModalBtn) {
+        openBrandModalBtn.addEventListener('click', openBrandModal);
+    }
+
+    // Event listener untuk menutup modal brand
+    if (closeBrandModalBtn) {
+        closeBrandModalBtn.addEventListener('click', closeBrandModal);
+    }
+    
+    if (batalBrandBtn) {
+        batalBrandBtn.addEventListener('click', closeBrandModal);
+    }
+
+    // Menutup modal ketika klik di luar konten modal
+    if (brandModal) {
+        brandModal.addEventListener('click', function(e) {
+            if (e.target === brandModal) {
+                closeBrandModal();
+            }
+        });
+    }
+
+    // Event listener untuk form submit brand
+    if (brandForm) {
+        brandForm.addEventListener('submit', function(e) {
+            // Validasi bisa ditambahkan di sini sebelum submit
+            const namaBrand = document.getElementById('namaBrand').value;
+            const asalBrand = document.getElementById('asalBrand').value;
+            
+            if (!namaBrand || !asalBrand) {
+                e.preventDefault();
+                alert('Nama brand dan asal brand harus diisi!');
+                return;
+            }
+            
+            // Form akan di-submit secara normal ke Laravel
+            // Loading state bisa ditambahkan di sini
+            const submitBtn = brandForm.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
+            submitBtn.disabled = true;
+        });
+    }
+
+    // Fungsi untuk mereset preview gambar
+    function resetImagePreview() {
+        if (imagePreview) {
+            imagePreview.innerHTML = `
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
+                <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+            `;
+        }
+        if (deleteImageBtn) {
+            deleteImageBtn.classList.add('opacity-0', 'hidden');
+        }
+    }
+
+    // Event listener untuk area upload gambar
+    if (imageUploadArea) {
+        imageUploadArea.addEventListener('click', function() {
+            imageInput.click();
+        });
+
+        // Drag and drop functionality
+        imageUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            imageUploadArea.classList.add('border-primary', 'bg-blue-50');
+        });
+
+        imageUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            imageUploadArea.classList.remove('border-primary', 'bg-blue-50');
+        });
+
+        imageUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            imageUploadArea.classList.remove('border-primary', 'bg-blue-50');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                imageInput.files = files;
+                handleImageSelection(files[0]);
+            }
+        });
+    }
+
+    // Event listener untuk input file gambar
+    if (imageInput) {
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleImageSelection(file);
+            }
+        });
+    }
+
+    // Fungsi untuk menangani pemilihan gambar
+    function handleImageSelection(file) {
+        // Validasi ukuran file (maks 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('Ukuran file terlalu besar. Maksimal 5MB.');
+            resetImagePreview();
+            return;
+        }
+        
+        // Validasi tipe file
+        if (!file.type.match('image.*')) {
+            alert('Hanya file gambar yang diizinkan.');
+            resetImagePreview();
+            return;
+        }
+        
+        // Tampilkan preview gambar
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if (imagePreview) {
+                imagePreview.innerHTML = `
+                    <img src="${e.target.result}" class="max-h-48 mx-auto rounded-md shadow-sm" alt="Preview Gambar">
+                `;
+            }
+            if (deleteImageBtn) {
+                deleteImageBtn.classList.remove('opacity-0', 'hidden');
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Event listener untuk tombol hapus gambar
+    if (deleteImageBtn) {
+        deleteImageBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Mencegah event bubbling ke parent
+            resetImagePreview();
+            if (imageInput) {
+                imageInput.value = '';
+            }
+        });
+    }
+
+    // Fungsi untuk menampilkan modal dari PHP/Blade jika ada error
+    @if($errors->has('nama_brand') || $errors->has('asal_brand') || $errors->has('gambar_brand'))
+        openBrandModal();
+    @endif
+});
+</script>

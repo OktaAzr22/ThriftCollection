@@ -81,6 +81,7 @@
         <div class="flex-1 overflow-auto flex flex-col h-[calc(100vh-80px)]">
             <!-- Content -->
             <main class="p-6 flex-1 overflow-auto">
+                
                 <!-- Statistik Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-lg shadow p-6">
@@ -130,6 +131,26 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mb-6">
+                    <nav class="flex justify-end    " aria-label="Breadcrumb">
+                        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                            <li class="inline-flex items-center">
+                                <a href="#" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-primary transition-colors duration-200">
+                                    <i class="fas fa-home mr-2"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li aria-current="page">
+                                <div class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                                    <span class="ml-1 text-sm font-medium text-gray-700 md:ml-2">Statistik</span>
+                                </div>
+                            </li>
+                        </ol>
+                    </nav>
+                    
                 </div>
 
                 <!-- Charts & Tables -->
@@ -384,6 +405,177 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- Form Step Section -->
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-xl font-bold text-gray-900">Tambah Produk Baru</h2>
+                        <button id="resetForm" class="px-4 py-2 text-gray-600 hover:text-gray-800 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors duration-200">
+                            <i class="fas fa-redo mr-2"></i>Reset Form
+                        </button>
+                    </div>
+
+                    <!-- Step Progress -->
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center relative">
+                            <!-- Progress Line -->
+                            <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
+                            <div id="progressLine" class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-10 transition-all duration-500 ease-in-out" style="width: 0%"></div>
+                            
+                            <!-- Steps -->
+                            <div class="step-item relative z-20 flex flex-col items-center">
+                                <div class="step-number w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold transition-all duration-300">1</div>
+                                <span class="mt-2 text-sm font-medium text-primary">Informasi Dasar</span>
+                            </div>
+                            <div class="step-item relative z-20 flex flex-col items-center">
+                                <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold transition-all duration-300">2</div>
+                                <span class="mt-2 text-sm font-medium text-gray-500">Kategori & Brand</span>
+                            </div>
+                            <div class="step-item relative z-20 flex flex-col items-center">
+                                <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold transition-all duration-300">3</div>
+                                <span class="mt-2 text-sm font-medium text-gray-500">Gambar & Tanggal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Steps -->
+                    <form id="productForm" class="space-y-6">
+                        <!-- Step 1: Informasi Dasar -->
+                        <div id="step1" class="step-content active">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Informasi Dasar Produk</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="productName" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk</label>
+                                    <input type="text" id="productName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="Masukkan nama produk">
+                                </div>
+                                <div>
+                                    <label for="productPrice" class="block text-sm font-medium text-gray-700 mb-1">Harga Produk</label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+                                        <input type="number" id="productPrice" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="0">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="shippingCost" class="block text-sm font-medium text-gray-700 mb-1">Biaya Pengiriman</label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+                                        <input type="number" id="shippingCost" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="flex items-end">
+                                    <div class="w-full">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Total Harga</label>
+                                        <div class="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                                            <span id="totalPrice" class="text-lg font-bold text-gray-900">Rp 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end mt-8">
+                                <button type="button" id="nextStep1" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                                    Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Kategori & Brand -->
+                        <div id="step2" class="step-content hidden">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Kategori & Brand Produk</h3>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <!-- Kolom Kiri: Dropdown -->
+                                <div class="w-full md:w-1/2 space-y-6">
+                                    <div>
+                                        <label for="productBrand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                                        <select id="productBrand" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                            <option value="">Pilih Brand</option>
+                                            <option value="nike">Nike</option>
+                                            <option value="adidas">Adidas</option>
+                                            <option value="sony">Sony</option>
+                                            <option value="samsung">Samsung</option>
+                                            <option value="apple">Apple</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="productStore" class="block text-sm font-medium text-gray-700 mb-1">Toko</label>
+                                        <select id="productStore" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                            <option value="">Pilih Toko</option>
+                                            <option value="tokopedia">Tokopedia</option>
+                                            <option value="shopee">Shopee</option>
+                                            <option value="bukalapak">Bukalapak</option>
+                                            <option value="blibli">Blibli</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="productCategory" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                                        <select id="productCategory" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                            <option value="">Pilih Kategori</option>
+                                            <option value="elektronik">Elektronik</option>
+                                            <option value="fashion">Fashion</option>
+                                            <option value="olahraga">Olahraga</option>
+                                            <option value="rumahtangga">Rumah Tangga</option>
+                                            <option value="hobi">Hobi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Kolom Kanan: Deskripsi -->
+                                <div class="w-full md:w-1/2">
+                                    <label for="productDescription" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Produk</label>
+                                    <textarea id="productDescription" rows="10" class="w-full h-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="Tulis deskripsi produk di sini..."></textarea>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-8">
+                                <button type="button" id="prevStep2" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i> Kembali
+                                </button>
+                                <button type="button" id="nextStep2" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                                    Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Gambar & Tanggal -->
+                        <div id="step3" class="step-content hidden">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Gambar & Tanggal Produk</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Unggah Gambar Produk</label>
+                                    <div class="relative">
+                                        <!-- Container untuk upload gambar -->
+                                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors duration-200">
+                                            <input type="file" id="productImage" class="hidden" accept="image/*">
+                                            <div id="imagePreview" class="preview-area flex flex-col items-center justify-center">
+                                                <div class="text-center">
+                                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                                                    <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
+                                                    <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Tombol hapus gambar (muncul hanya saat ada gambar) -->
+                                        <button id="deleteImage" class="absolute -top-2 -right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-md opacity-0 transition-opacity duration-200">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="productDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Produk</label>
+                                    <input type="date" id="productDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-8">
+                                <button type="button" id="prevStep3" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i> Kembali
+                                </button>
+                                <button type="submit" class="px-6 py-2 bg-secondary text-white rounded-lg hover:bg-green-600 transition-colors duration-200 flex items-center">
+                                    <i class="fas fa-check mr-2"></i> Simpan Produk
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </main>
 
             <!-- Footer -->
@@ -536,7 +728,231 @@
                 closeModal();
             });
 
-            
+            // Form Step Logic
+            const stepContents = document.querySelectorAll('.step-content');
+            const stepNumbers = document.querySelectorAll('.step-number');
+            const progressLine = document.getElementById('progressLine');
+            let currentStep = 1;
+
+            // Initialize progress
+            updateProgress();
+
+            // Next Step 1
+            document.getElementById('nextStep1').addEventListener('click', function() {
+                if (validateStep1()) {
+                    showStep(2);
+                }
+            });
+
+            // Next Step 2
+            document.getElementById('nextStep2').addEventListener('click', function() {
+                if (validateStep2()) {
+                    showStep(3);
+                }
+            });
+
+            // Previous Step 2
+            document.getElementById('prevStep2').addEventListener('click', function() {
+                showStep(1);
+            });
+
+            // Previous Step 3
+            document.getElementById('prevStep3').addEventListener('click', function() {
+                showStep(2);
+            });
+
+            // Form submission
+            document.getElementById('productForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (validateStep3()) {
+                    // Simulate form submission
+                    alert('Produk berhasil ditambahkan!');
+                    resetForm();
+                }
+            });
+
+            // Reset form
+            document.getElementById('resetForm').addEventListener('click', function() {
+                resetForm();
+            });
+
+            // Calculate total price
+            document.getElementById('productPrice').addEventListener('input', calculateTotalPrice);
+            document.getElementById('shippingCost').addEventListener('input', calculateTotalPrice);
+
+            // Image upload and delete functionality
+            setupSingleImageUpload();
+
+            function showStep(step) {
+                // Hide all steps
+                stepContents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+
+                // Show current step
+                document.getElementById(`step${step}`).classList.remove('hidden');
+                document.getElementById(`step${step}`).classList.add('active');
+
+                // Update step numbers
+                stepNumbers.forEach((number, index) => {
+                    if (index < step) {
+                        number.classList.remove('bg-gray-200', 'text-gray-500');
+                        number.classList.add('bg-primary', 'text-white');
+                    } else {
+                        number.classList.remove('bg-primary', 'text-white');
+                        number.classList.add('bg-gray-200', 'text-gray-500');
+                    }
+                });
+
+                currentStep = step;
+                updateProgress();
+            }
+
+            function updateProgress() {
+                const progressPercentage = ((currentStep - 1) / (stepNumbers.length - 1)) * 100;
+                progressLine.style.width = `${progressPercentage}%`;
+            }
+
+            function validateStep1() {
+                const name = document.getElementById('productName').value;
+                const price = document.getElementById('productPrice').value;
+                
+                if (!name) {
+                    alert('Nama produk harus diisi');
+                    return false;
+                }
+                
+                if (!price || price <= 0) {
+                    alert('Harga produk harus diisi dan lebih dari 0');
+                    return false;
+                }
+                
+                return true;
+            }
+
+            function validateStep2() {
+                const brand = document.getElementById('productBrand').value;
+                const category = document.getElementById('productCategory').value;
+                
+                if (!brand) {
+                    alert('Brand produk harus dipilih');
+                    return false;
+                }
+                
+                if (!category) {
+                    alert('Kategori produk harus dipilih');
+                    return false;
+                }
+                
+                return true;
+            }
+
+            function validateStep3() {
+                const date = document.getElementById('productDate').value;
+                
+                if (!date) {
+                    alert('Tanggal produk harus diisi');
+                    return false;
+                }
+                
+                return true;
+            }
+
+            function calculateTotalPrice() {
+                const price = parseFloat(document.getElementById('productPrice').value) || 0;
+                const shipping = parseFloat(document.getElementById('shippingCost').value) || 0;
+                const total = price + shipping;
+                
+                document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            }
+
+            function setupSingleImageUpload() {
+                const input = document.getElementById('productImage');
+                const preview = document.getElementById('imagePreview');
+                const deleteBtn = document.getElementById('deleteImage');
+                
+                // Fungsi untuk menampilkan gambar
+                function displayImage(file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        preview.innerHTML = `
+                            <div class="relative w-full h-48">
+                                <img src="${e.target.result}" class="h-full w-full object-contain rounded-md" alt="Preview">
+                            </div>
+                        `;
+                        // Tampilkan tombol hapus
+                        deleteBtn.classList.remove('opacity-0');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+                
+                // Event listener untuk upload gambar
+                input.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        // Validasi ukuran file (maks 5MB)
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('Ukuran file terlalu besar. Maksimal 5MB.');
+                            return;
+                        }
+                        
+                        // Validasi tipe file
+                        if (!file.type.match('image.*')) {
+                            alert('Hanya file gambar yang diizinkan.');
+                            return;
+                        }
+                        
+                        displayImage(file);
+                    }
+                });
+                
+                // Event listener untuk klik area preview
+                preview.addEventListener('click', function() {
+                    input.click();
+                });
+                
+                // Event listener untuk tombol hapus
+                deleteBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Mencegah event bubbling ke parent
+                    resetImagePreview();
+                });
+                
+                // Fungsi untuk mereset preview gambar
+                function resetImagePreview() {
+                    preview.innerHTML = `
+                        <div class="text-center">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                            <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
+                            <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                        </div>
+                    `;
+                    // Reset input file
+                    input.value = '';
+                    // Sembunyikan tombol hapus
+                    deleteBtn.classList.add('opacity-0');
+                }
+            }
+
+            function resetForm() {
+                document.getElementById('productForm').reset();
+                showStep(1);
+                
+                // Reset image preview
+                document.getElementById('imagePreview').innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
+                        <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                    </div>
+                `;
+                // Sembunyikan tombol hapus
+                document.getElementById('deleteImage').classList.add('opacity-0');
+                
+                calculateTotalPrice();
+            }
         });
     </script>
 </body>

@@ -1,0 +1,495 @@
+@extends('layouts.app')
+
+@section('title', 'Dashboard')
+
+@section('content')
+    <!-- Statistik Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-3 rounded-2xl bg-blue-100 text-blue-500 mr-4">
+                    <i class="fas fa-users text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-900">1,248</p>
+                    <p class="text-sm font-medium text-gray-500">Total Brand</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                </div>
+                <div>
+                    <p class="font-bold text-gray-900">Rp000.000</p>
+                    <p class="text-sm font-medium text-gray-500">Total Ongkir</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
+                    <i class="fas fa-chart-line text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-900">$24,580</p>
+                    <p class="text-sm font-medium text-gray-500">Total Item</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
+                    <i class="fas fa-eye text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-900">42,365</p>
+                    <p class="text-sm font-medium text-gray-500">Total Harga</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-6">
+        <nav class="flex justify-end" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="#" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-primary transition-colors duration-200">
+                        <i class="fas fa-home mr-2"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                        <span class="ml-1 text-sm font-medium text-gray-700 md:ml-2">Statistik</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Charts & Tables -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Grafik -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg font-bold text-gray-900">Statistik Pengunjung</h2>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 text-sm rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors duration-200">Minggu</button>
+                    <button class="px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200">Bulan</button>
+                    <button class="px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200">Tahun</button>
+                </div>
+            </div>
+            <div class="h-64 bg-gray-50 rounded-lg flex items-center justify-center border border-dashed border-gray-300">
+                <p class="text-gray-500">Grafik akan ditampilkan di sini</p>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg font-bold text-gray-900">Statistik Penjualan</h2>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 text-sm rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors duration-200">Minggu</button>
+                    <button class="px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200">Bulan</button>
+                    <button class="px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200">Tahun</button>
+                </div>
+            </div>
+            <div class="h-64 bg-gray-50 rounded-lg flex items-center justify-center border border-dashed border-gray-300">
+                <p class="text-gray-500">Grafik akan ditampilkan di sini</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Item Brand Section -->
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <h2 class="text-lg font-bold text-gray-900">Item Brand</h2>
+
+            <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                <div class="relative w-full md:w-64">
+                    <input type="text" placeholder="Cari brand..."
+                        class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+
+                <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    <i class="fas fa-plus mr-2"></i>
+                    Tambah Data
+                </button>
+            </div>
+        </div>
+
+        <!-- TABEL BRAND -->
+        <div class="overflow-x-auto rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <thead class="bg-gray-50 font-semibold text-gray-600 uppercase">
+                    <tr>
+                        <th class="px-6 py-3 text-left">Gambar</th>
+                        <th class="px-6 py-3 text-left">Nama Brand</th>
+                        <th class="px-6 py-3 text-left">Asal Brand</th>
+                        <th class="px-6 py-3 text-left">Item Brand</th>
+                        <th class="px-6 py-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- ROW 1 -->
+                    <tr class="hover:bg-gray-50 transition duration-150">
+                        <!-- GAMBAR -->
+                        <td class="px-6 py-4">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=60"
+                                class="h-14 w-14 rounded-md object-cover shadow-sm">
+                        </td>
+
+                        <!-- NAMA -->
+                        <td class="px-6 py-4 font-medium text-gray-900">
+                            Ralph Laurent
+                        </td>
+
+                        <!-- ASAL -->
+                        <td class="px-6 py-4 text-gray-600">
+                            Amerika
+                        </td>
+
+                        <!-- TOTAL ITEM -->
+                        <td class="px-6 py-4 text-gray-700 font-semibold">
+                            45 Item
+                        </td>
+
+                        <!-- AKSI -->
+                        <td class="px-6 py-4">
+                            <div class="flex justify-center space-x-3">
+                                <button class="p-2 hover:bg-blue-100 text-blue-600 rounded-md" title="Lihat Detail">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+
+                                <button class="p-2 hover:bg-yellow-100 text-yellow-600 rounded-md" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+
+                                <button class="p-2 hover:bg-red-100 text-red-600 rounded-md" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Tabel Kategori -->
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <h2 class="text-lg font-bold text-gray-900">Data Kategori</h2>
+            <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                <div class="relative w-full md:w-64">
+                    <input type="text" placeholder="Cari kategori..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button id="tambahKategoriBtn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    <i class="fas fa-plus mr-2"></i>
+                    Tambah Kategori
+                </button>
+            </div>
+        </div>
+        
+        <div class="overflow-x-auto rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Kategori</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah Produk</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Baris 1 -->
+                    <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">Elektronik</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">156</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex space-x-2">
+                                <button class="view-btn text-blue-600 hover:text-blue-900 transition-colors duration-200" >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-900 transition-colors duration-200">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900 transition-colors duration-200">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="flex items-center justify-between mt-6">
+            <div class="text-sm text-gray-700">
+                Menampilkan 1-5 dari 12 kategori
+            </div>
+            <div class="flex space-x-2">
+                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors duration-200">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="px-3 py-1 bg-primary text-white rounded-md">1</button>
+                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors duration-200">2</button>
+                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors duration-200">3</button>
+                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors duration-200">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Item Terbaru Section -->
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <h2 class="text-lg font-bold text-gray-900">Item Terbaru</h2>
+            <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                <div class="relative w-full md:w-64">
+                    <input type="text" placeholder="Cari produk..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    Download PDF
+                </button>
+            </div>
+        </div>
+        
+        <div class="overflow-x-auto rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produk</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Asal</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Produk 1 -->
+                    <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <td class="px-4 py-4">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-12 w-12">
+                                    <img class="h-12 w-12 rounded-md object-cover" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Headphone">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">Headphone Wireless Premium</div>
+                                    <div class="text-sm text-gray-500">12 Agu 2023</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm font-medium text-gray-900">Rp 2.999.000</div>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm text-gray-900">Elektronik</div>
+                        </td>
+                        <td class="px-4 py-4">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                Sony
+                            </span>
+                        </td>
+                        <td class="px-4 py-4 text-sm text-gray-900">
+                            Jepang
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm font-bold text-gray-900">Rp 134.955.000</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Form Step Section -->
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-bold text-gray-900">Tambah Produk Baru</h2>
+            <button id="resetForm" class="px-4 py-2 text-gray-600 hover:text-gray-800 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors duration-200">
+                <i class="fas fa-redo mr-2"></i>Reset Form
+            </button>
+        </div>
+
+        <!-- Step Progress -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center relative">
+                <!-- Progress Line -->
+                <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
+                <div id="progressLine" class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-10 transition-all duration-500 ease-in-out" style="width: 0%"></div>
+                
+                <!-- Steps -->
+                <div class="step-item relative z-20 flex flex-col items-center">
+                    <div class="step-number w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold transition-all duration-300">1</div>
+                    <span class="mt-2 text-sm font-medium text-primary">Informasi Dasar</span>
+                </div>
+                <div class="step-item relative z-20 flex flex-col items-center">
+                    <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold transition-all duration-300">2</div>
+                    <span class="mt-2 text-sm font-medium text-gray-500">Kategori & Brand</span>
+                </div>
+                <div class="step-item relative z-20 flex flex-col items-center">
+                    <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold transition-all duration-300">3</div>
+                    <span class="mt-2 text-sm font-medium text-gray-500">Gambar & Tanggal</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Steps -->
+        <form id="productForm" class="space-y-6">
+            <!-- Step 1: Informasi Dasar -->
+            <div id="step1" class="step-content active">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Informasi Dasar Produk</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="productName" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk</label>
+                        <input type="text" id="productName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="Masukkan nama produk">
+                    </div>
+                    <div>
+                        <label for="productPrice" class="block text-sm font-medium text-gray-700 mb-1">Harga Produk</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+                            <input type="number" id="productPrice" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="0">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="shippingCost" class="block text-sm font-medium text-gray-700 mb-1">Biaya Pengiriman</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+                            <input type="number" id="shippingCost" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="flex items-end">
+                        <div class="w-full">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Total Harga</label>
+                            <div class="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                                <span id="totalPrice" class="text-lg font-bold text-gray-900">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end mt-8">
+                    <button type="button" id="nextStep1" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                        Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Kategori & Brand -->
+            <div id="step2" class="step-content hidden">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kategori & Brand Produk</h3>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Kolom Kiri: Dropdown -->
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <div>
+                            <label for="productBrand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                            <select id="productBrand" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                <option value="">Pilih Brand</option>
+                                <option value="nike">Nike</option>
+                                <option value="adidas">Adidas</option>
+                                <option value="sony">Sony</option>
+                                <option value="samsung">Samsung</option>
+                                <option value="apple">Apple</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="productStore" class="block text-sm font-medium text-gray-700 mb-1">Toko</label>
+                            <select id="productStore" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                <option value="">Pilih Toko</option>
+                                <option value="tokopedia">Tokopedia</option>
+                                <option value="shopee">Shopee</option>
+                                <option value="bukalapak">Bukalapak</option>
+                                <option value="blibli">Blibli</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="productCategory" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                            <select id="productCategory" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                                <option value="">Pilih Kategori</option>
+                                <option value="elektronik">Elektronik</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="olahraga">Olahraga</option>
+                                <option value="rumahtangga">Rumah Tangga</option>
+                                <option value="hobi">Hobi</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Kolom Kanan: Deskripsi -->
+                    <div class="w-full md:w-1/2">
+                        <label for="productDescription" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Produk</label>
+                        <textarea id="productDescription" rows="10" class="w-full h-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="Tulis deskripsi produk di sini..."></textarea>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-8">
+                    <button type="button" id="prevStep2" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Kembali
+                    </button>
+                    <button type="button" id="nextStep2" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                        Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Gambar & Tanggal -->
+            <div id="step3" class="step-content hidden">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Gambar & Tanggal Produk</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Unggah Gambar Produk</label>
+                        <div class="relative">
+                            <!-- Container untuk upload gambar -->
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors duration-200">
+                                <input type="file" id="productImage" class="hidden" accept="image/*">
+                                <div id="imagePreview" class="preview-area flex flex-col items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                                        <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
+                                        <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tombol hapus gambar (muncul hanya saat ada gambar) -->
+                            <button id="deleteImage" class="absolute -top-2 -right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-md opacity-0 transition-opacity duration-200">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="productDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Produk</label>
+                        <input type="date" id="productDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                    </div>
+                </div>
+                <div class="flex justify-between mt-8">
+                    <button type="button" id="prevStep3" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Kembali
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-secondary text-white rounded-lg hover:bg-green-600 transition-colors duration-200 flex items-center">
+                        <i class="fas fa-check mr-2"></i> Simpan Produk
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+@endsection
