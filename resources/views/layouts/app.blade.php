@@ -16,11 +16,7 @@
                         dark: '#212B36',
                         light: '#F4F7FF'
                     },
-                    animation: {
-                        'fade-in': 'fadeIn 0.3s ease-in-out',
-                        'slide-in-right': 'slideInRight 0.3s ease-out',
-                        'slide-out-right': 'slideOutRight 0.3s ease-in'
-                    },
+                    
                     keyframes: {
                         fadeIn: {
                             '0%': { opacity: '0' },

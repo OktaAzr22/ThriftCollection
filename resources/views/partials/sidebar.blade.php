@@ -15,9 +15,9 @@
                         <span>Kategori</span>
                     </a>
                     
-                    <a href="#" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200">
+                    <a href="{{ route('toko.index') }}" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200 {{ request()->routeIs('kategori.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }}">
                         <i class="fas fa-shopping-cart w-5 mr-3"></i>
-                        <span>eCommerce</span>
+                        <span>Toko</span>
                     </a>
                 </nav>
             </div>

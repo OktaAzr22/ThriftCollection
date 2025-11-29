@@ -24,27 +24,27 @@ class KategoriController extends Controller
 
 
     public function store(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'nama' => ['required','min:3','max:255', Rule::unique('kategoris','nama')],
-    ], [
-        'nama.required' => 'Nama kategori wajib diisi',
-        'nama.min' => 'Nama kategori minimal 3 karakter',
-        'nama.max' => 'Nama kategori maksimal 255 karakter',
-        'nama.unique' => 'Nama kategori sudah ada di database',
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => ['required','min:3','max:255', Rule::unique('kategoris','nama')],
+        ], [
+            'nama.required' => 'Nama kategori wajib diisi',
+            'nama.min' => 'Nama kategori minimal 3 karakter',
+            'nama.max' => 'Nama kategori maksimal 255 karakter',
+            'nama.unique' => 'Nama kategori sudah ada di database',
+        ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()
-                         ->withErrors($validator)
-                         ->withInput()
-                         ->with('openModal', 'modalTambahKategori');
+        if ($validator->fails()) {
+            return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput()
+                            ->with('openModal', 'modalTambahKategori');
+        }
+
+        Kategori::create($request->only('nama'));
+
+        return redirect()->back()->with('success', 'Kategori berhasil ditambahkan.');
     }
-
-    Kategori::create($request->only('nama'));
-
-    return redirect()->back()->with('success', 'Kategori berhasil ditambahkan.');
-}
 
 public function update(Request $request, Kategori $kategori)
 {
