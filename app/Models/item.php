@@ -32,4 +32,9 @@ class item extends Model
     public function kategori() {
         return $this->belongsTo(Kategori::class);
     }
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class);
+    }
 }

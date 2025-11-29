@@ -10,7 +10,7 @@
                         <span>Brand</span>
                     </a>
 
-                    <a href="{{ route('kategori.index') }}" class="flex items-center px-3 py-3 {{ request()->routeIs('kategori.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }} rounded-lg">
+                    <a href="{{ route('master.index') }}" class="flex items-center px-3 py-3 {{ request()->routeIs('master.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }} rounded-lg">
                         <i class="fas fa-tachometer-alt w-5 mr-3"></i>
                         <span>Kategori</span>
                     </a>
