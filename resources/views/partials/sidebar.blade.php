@@ -14,10 +14,15 @@
                         <i class="fas fa-tachometer-alt w-5 mr-3"></i>
                         <span>Kategori</span>
                     </a>
-                    
-                    <a href="{{ route('toko.index') }}" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200 {{ request()->routeIs('kategori.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }}">
-                        <i class="fas fa-shopping-cart w-5 mr-3"></i>
+
+                    <a href="{{ route('toko.index') }}" class="flex items-center px-3 py-3 {{ request()->routeIs('toko.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }} rounded-lg">
+                        <i class="fas fa-tachometer-alt w-5 mr-3"></i>
                         <span>Toko</span>
+                    </a>
+                    
+                    <a href="{{ route('items.index') }}" class="flex items-center px-3 py-3 {{ request()->routeIs('items.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }} rounded-lg">
+                        <i class="fas fa-tachometer-alt w-5 mr-3"></i>
+                        <span>Item</span>
                     </a>
                 </nav>
             </div>

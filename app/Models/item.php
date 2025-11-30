@@ -16,6 +16,7 @@ class item extends Model
         'toko_id',
         'brand_id',
         'kategori_id',
+        'id_color',
         'gambar',
         'deskripsi',
         'tanggal',

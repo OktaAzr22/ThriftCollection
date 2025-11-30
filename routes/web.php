@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
-
-
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\secondaryController;
 use App\Http\Controllers\TokoController;
 
@@ -42,3 +41,7 @@ Route::delete('/master/kategori/{kategori}', [secondaryController::class, 'delet
 Route::post('/master/color', [secondaryController::class, 'storeColor'])->name('master.color.store');
 Route::put('/master/color/{color}', [secondaryController::class, 'updateColor'])->name('master.color.update');
 Route::delete('/master/color/{color}', [secondaryController::class, 'deleteColor'])->name('master.color.destroy');
+
+Route::resource('items', ItemController::class)->except(['create', 'show']);
+Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+Route::post('/items', [ItemController::class, 'store'])->name('items.store');
