@@ -14,9 +14,23 @@
                         primary: '#3056D3',
                         secondary: '#13C296',
                         dark: '#212B36',
-                        light: '#F4F7FF'
+                        light: '#F4F7FF',
+                        accent: '#FF6B6B'
                     },
-                    
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0,0,0,0.05)',
+                        'card': '0 2px 15px rgba(0,0,0,0.07)',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-in-right': 'slideInRight 0.3s ease-out',
+                        'slide-out-right': 'slideOutRight 0.3s ease-in',
+                        'slide-up': 'slideUp 0.4s ease-out',
+                        'slide-down': 'slideDown 0.4s ease-out'
+                    },
                     keyframes: {
                         fadeIn: {
                             '0%': { opacity: '0' },
@@ -29,6 +43,14 @@
                         slideOutRight: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(100%)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)' },
+                            '100%': { transform: 'translateY(0)' }
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(100%)' }
                         }
                     }
                 }
@@ -36,12 +58,50 @@
         }
     </script>
     @stack('styles')
+    
 </head>
 <body class="bg-gray-50">
   @include('components.alert')
   @include('partials.header')
-  @include('partials.sidebar')
+  
   <x-confirm-delete />
+
+  <div class="flex">
+       
+
+        @include('partials.sidebar')
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto flex flex-col h-[calc(100vh-80px)]">
+            <!-- Content -->
+            <main class="p-6 flex-1 overflow-auto">
+                @yield('content')
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-gray-200 py-4 px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-sm text-gray-600 mb-2 md:mb-0">
+                        &copy; {{ date('Y') }} Thriftting. All rights reserved.
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-gray-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
     
 
     
@@ -49,6 +109,8 @@
    
 
     @stack('scripts')
+   
+
     <script>
     function openModal(id) {
     const modal = document.getElementById(id);
