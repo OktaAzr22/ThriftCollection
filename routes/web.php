@@ -45,3 +45,4 @@ Route::delete('/master/color/{color}', [secondaryController::class, 'deleteColor
 Route::resource('items', ItemController::class)->except(['create', 'show']);
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+

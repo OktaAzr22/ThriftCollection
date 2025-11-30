@@ -82,9 +82,9 @@
                                             </button>
                                             <button 
                                                 
-                                                class="px-3 py-1 bg-blue-600 text-white rounded-lg"
+                                                class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors duration-200" title="show"
                                             >
-                                                Detail
+                                                <i class="fas fa-eye"></i>
                                             </button>
 
 
