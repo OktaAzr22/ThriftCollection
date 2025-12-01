@@ -17,8 +17,7 @@ Route::get('/index', function () {
 
 Route::resource('brands', BrandController::class);
 
-// Route untuk melihat item milik brand tertentu
-Route::get('brands/{brand}/items', [BrandController::class, 'items'])->name('brands.items');
+
 
 
 
@@ -46,6 +45,10 @@ Route::resource('items', ItemController::class)->except(['create', 'show']);
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 
-Route::get('/items/{id}/detail', [ItemController::class, 'detail'])->name('items.detail');
 
 
+// list item dari brand
+Route::get('/brand/{id}/items', [BrandController::class, 'ajaxItems']);
+
+// detail item
+Route::get('/item/{id}/detail', [ItemController::class, 'ajaxDetail']);

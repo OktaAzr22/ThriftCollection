@@ -177,12 +177,14 @@ class ItemController extends Controller
         return redirect()->route('items.index')->with('success', 'Items berhasil dihapus.');
     }
 
-    public function detail($id)
+    
+
+public function ajaxDetail($id)
 {
-    $item = Item::with(['kategori', 'brand', 'toko', 'color'])->findOrFail($id);
+    $item = Item::with(['kategori','brand','color'])->findOrFail($id);
+    $item->total = $item->harga + ($item->ongkir ?? 0);
 
-    return response()->json($item);
+    return view('partials.item-detail', compact('item'));
 }
-
 
 }

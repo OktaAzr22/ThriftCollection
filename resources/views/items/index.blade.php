@@ -2,7 +2,8 @@
 
 @section('content')
 
-<x-item-modal />
+
+<x-modal-ajax id="global-modal" title="Detail Item" />
 
 <div class="bg-white rounded-xl shadow-soft p-6 mb-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -80,8 +81,9 @@
                             <button class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors duration-200" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
+                            
                             <button class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors duration-200" title="show"  
-                                    onclick="openItemModal({{ $item->id }})">
+                                    onclick="bukaModal('global-modal', '{{ url('/item/' . $item->id . '/detail') }}')">
                                 <i class="fas fa-eye"></i>
                             </button>
                             <button class="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors duration-200" title="Delete">

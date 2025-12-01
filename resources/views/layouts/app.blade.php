@@ -97,6 +97,17 @@
         .animate-zoomOut {
             animation: zoomOut 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
         }
+
+        /* Chrome, Edge, Safari */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+.no-scrollbar {
+    scroll-behavior: smooth;
+}
+
     </style>
     
 </head>
@@ -119,27 +130,7 @@
             </main>
 
             <!-- Footer -->
-            <footer class="bg-white border-t border-gray-200 py-4 px-6">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="text-sm text-gray-600 mb-2 md:mb-0">
-                        &copy; {{ date('Y') }} Thriftting. All rights reserved.
-                    </div>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-500 hover:text-gray-700">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-500 hover:text-gray-700">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-500 hover:text-gray-700">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-500 hover:text-gray-700">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-            </footer>
+            @include('partials.footer')
         </div>
     </div>
     @stack('scripts')

@@ -102,12 +102,14 @@ class BrandController extends Controller
         }
     }
 
-    public function items($brandId)
-    {
-        $brand = Brand::findOrFail($brandId);
-        $items = $brand->items;
+    public function ajaxItems($id)
+{
+    $brand = Brand::findOrFail($id);
+    $items = $brand->items()->get();
 
-        return view('brands.items', compact('brand', 'items'));
-    }
+    return view('partials.brand-items', compact('brand', 'items'));
+}
+
+   
 }
 
