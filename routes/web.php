@@ -46,3 +46,6 @@ Route::resource('items', ItemController::class)->except(['create', 'show']);
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 
+Route::get('/items/{id}/detail', [ItemController::class, 'detail'])->name('items.detail');
+
+
