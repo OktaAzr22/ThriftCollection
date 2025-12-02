@@ -22,7 +22,7 @@ class TokoController extends Controller
             });
         }
 
-        $tokos = $query->orderByDesc('items_max_ongkir')->paginate(5)->withQueryString();
+        $tokos = $query->orderByDesc('items_max_ongkir')->paginate(4)->withQueryString();
 
         return view('toko.index', compact('tokos', 'search'));
     }

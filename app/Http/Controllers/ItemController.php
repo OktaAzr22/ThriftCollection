@@ -36,7 +36,7 @@ class ItemController extends Controller
         }
 
         $items = $query->with(['kategori', 'brand', 'toko'])
-                    ->paginate(10)
+                    ->paginate(5)
                     ->withQueryString();
 
         $kategori = Kategori::all();

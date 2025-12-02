@@ -11,31 +11,21 @@
         <h2 class="text-lg font-bold text-gray-900">Data Pengiriman</h2>
 
         <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-            
+            <form method="GET" action="{{ route('toko.index') }}">
+                <div class="relative">
+                    <input type="text" 
+                        name="search" 
+                        value="{{ old('search', $search) }}"
+                        placeholder="Cari nama toko..." 
+                        class="px-4 py-2 text-sm border border-gray-300 rounded-lg sm:w-64">
 
-            <form method="GET" action="{{ route('toko.index') }}" class="relative w-full md:w-64">
-                <input class="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" 
-                    type="text"
-                    id="searchInput"
-                    name="search"
-                    value="{{ request('search') }}"
-                    data-skeleton-id="tokoSkeleton"
-                    data-table-id="tableBody"
-                    data-base-url="{{ route('toko.index') }}"
-                    oninput="startSearchLoading(this); this.form.submit()"
-                    placeholder="Cari data..."
-                >
-
-                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-
-                @if(request('search'))
-                    <button type="button" data-target-input="#searchInput"
-                    data-base-url="{{ route('toko.index') }}"
-                    onclick="clearSearch(this)"
-                        class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
-                        <i class="fas fa-times"></i>
-                    </button>
-                @endif
+                    @if(request('search'))
+                        <button type="button" onclick="clearSearch()" 
+                                class="absolute text-gray-400 right-2 top-2 hover:text-gray-600">
+                            ✕
+                        </button>
+                    @endif
+                </div>
             </form>
 
             <button onclick="openModal('modalTambahToko')" 
@@ -66,63 +56,52 @@
                 </tr>
             </thead>
 
-            <x-skeleton-table id="tokoSkeleton" :cols="5" :rows="1" class="mt-6 w-full" />
+            <tbody class="bg-white divide-y divide-gray-200">
+                @forelse ($tokos as $toko)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-4">
+                            <div class="text-sm font-medium text-gray-900">{{ $toko->nama }}</div>
+                        </td>
 
-            <tbody id="tableBody"  class="bg-white divide-y divide-gray-200">
-                @if($tokos->count() > 0)
-                    @forelse ($tokos as $toko)
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-4">
-                                <div class="text-sm font-medium text-gray-900">{{ $toko->nama }}</div>
-                            </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm text-gray-900">{{ $toko->asal }}</div>
+                        </td>
 
-                            <td class="px-4 py-4">
-                                <div class="text-sm text-gray-900">{{ $toko->asal }}</div>
-                            </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm text-gray-900 max-w-xs truncate">
+                                {{ $toko->deskripsi ?? '-' }}
+                            </div>
+                        </td>
 
-                            <td class="px-4 py-4">
-                                <div class="text-sm text-gray-900 max-w-xs truncate">
-                                    {{ $toko->deskripsi ?? '-' }}
-                                </div>
-                            </td>
+                        <td class="px-4 py-4">
+                            <div class="text-sm font-medium text-gray-900">
+                                {{ number_format($toko->items_max_ongkir ?? 0, 0, ',', '.') }}
+                            </div>
+                        </td>
 
-                            <td class="px-4 py-4">
-                                <div class="text-sm font-medium text-gray-900">
-                                    {{ number_format($toko->items_max_ongkir ?? 0, 0, ',', '.') }}
-                                </div>
-                            </td>
+                        <td class="px-4 py-4">
+                            <div class="flex space-x-2">
+                                {{-- tombol edit --}}
+                                <button onclick="openModal('modalEditToko{{ $toko->id }}')" 
+                                        class="text-blue-600 hover:text-blue-900">
+                                    <i class="fas fa-edit"></i>
+                                </button>
 
-                            <td class="px-4 py-4">
-                                <div class="flex space-x-2">
-                                    {{-- tombol edit --}}
-                                    <button onclick="openModal('modalEditToko{{ $toko->id }}')" 
-                                            class="text-blue-600 hover:text-blue-900">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-
-                                    {{-- tombol delete --}}
-                                    <button onclick="openDeleteModal(
-                                                '{{ route('toko.destroy', $toko->id) }}', 
-                                                'toko', 
-                                                '{{ $toko->nama }}'
-                                            )"
-                                            class="text-red-600 hover:text-red-900">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr><td colspan="5" class="text-center py-4">Tidak ada data toko.</td></tr>
-                    @endforelse
-                @else
-                    <tr>
-                        <td colspan="5" class="py-4 text-center text-red-500 font-semibold">
-                            ⚠️ Data tidak ditemukan untuk pencarian:
-                            "<span class="font-bold">{{ request('search') }}</span>"
+                                {{-- tombol delete --}}
+                                <button onclick="openDeleteModal(
+                                            '{{ route('toko.destroy', $toko->id) }}', 
+                                            'toko', 
+                                            '{{ $toko->nama }}'
+                                        )"
+                                        class="text-red-600 hover:text-red-900">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
-                @endif
+                @empty
+                    <tr><td colspan="5" class="text-center py-4">Tidak ada data toko.</td></tr>
+                @endforelse
             </tbody>
         </table>
         <div class="mt-4">

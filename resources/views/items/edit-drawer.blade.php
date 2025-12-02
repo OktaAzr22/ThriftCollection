@@ -102,62 +102,51 @@
             <textarea name="deskripsi" rows="4"
                 class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-200 resize-none">{{ old('deskripsi', $item->deskripsi) }}</textarea>
         </div>
-
-        <!-- Gambar Produk -->
+{{--  --}}
+<!-- Gambar Produk -->
 <div>
     <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Produk</label>
-    
-    @if($item->gambar)
-        <div class="mb-6">
-            <p class="text-sm text-gray-600 mb-2">Gambar saat ini:</p>
-            <img src="{{ asset('storage/'.$item->gambar) }}" 
-                 class="w-40 h-40 rounded-lg border-2 border-gray-300 object-cover shadow-sm">
-        </div>
-        
-        <p class="text-sm text-gray-600 mb-3">Upload gambar baru:</p>
-    @endif
 
-    <!-- Area Upload -->
-    <div class="space-y-4">
-        <!-- Upload Area -->
-        <label for="gambarInput" class="block">
-            <div id="uploadArea" 
-                 class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-all duration-300 cursor-pointer">
-                <input type="file" name="gambar" id="gambarInput" 
-                       class="hidden" accept="image/*">
-                
-                <div class="flex flex-col items-center">
-                    <!-- Icon Upload -->
-                    <div class="w-10 h-10 mb-3 text-gray-400">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
-                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                    
-                    <!-- Text -->
-                    <p class="text-sm font-medium text-gray-700 mb-1">
-                        <span class="text-primary">Klik untuk upload</span>
-                    </p>
-                    <p class="text-xs text-gray-500">PNG, JPG, JPEG (Maks. 2MB)</p>
-                </div>
-            </div>
-        </label>
-        
-        <!-- Preview Area -->
-        <div id="previewArea" class="hidden">
-            <p class="text-sm text-gray-600 mb-2">Preview gambar baru:</p>
-            <div id="previewContainer" class="space-y-3">
-                <!-- Preview akan ditambahkan di sini -->
-            </div>
+    <div class="flex gap-6 flex-col md:flex-row items-start">
+        <!-- Gambar Lama -->
+        <div>
+            <p class="text-sm text-gray-600 mb-2">Gambar saat ini:</p>
+            @if($item->gambar)
+            <img src="{{ asset('storage/'.$item->gambar) }}" 
+                class="w-40 h-40 rounded-lg border-2 border-gray-300 object-cover shadow-sm">
+            @else
+            <p class="text-xs text-gray-500 italic">Tidak ada gambar</p>
+            @endif
         </div>
-        
-        <!-- Info -->
-        <p class="text-xs text-gray-500">
-            Biarkan kosong jika tidak ingin mengganti gambar
-        </p>
+
+        <!-- Upload Gambar Baru -->
+        <div class="space-y-3">
+            <p class="text-sm text-gray-600">Upload gambar baru:</p>
+
+            <input type="file" name="gambar" id="gambarInput"
+                accept="image/*"
+                class="block w-full text-sm text-gray-700 
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-lg file:border-0
+                    file:bg-primary file:text-white
+                    hover:file:bg-primary/80 cursor-pointer">
+
+            <!-- Preview -->
+            <div id="previewArea" class="hidden">
+                <p class="text-xs text-gray-500 mb-2">Preview Gambar:</p>
+                <img id="imagePreview" class="w-32 h-32 object-cover rounded-lg border shadow-sm">
+            </div>
+
+            <p class="text-xs text-gray-500">
+                Kosongkan jika tidak ingin mengganti gambar.
+            </p>
+        </div>
     </div>
 </div>
+
+{{--  --}}
+        <!-- Gambar Produk -->
+
 
 
 <!-- Footer Buttons -->
@@ -177,34 +166,5 @@
 </form>
 </div>
 
-<script>
-// Image preview functionality
-document.addEventListener('DOMContentLoaded', function() {
-    
 
-    
-    
-    // Form validation
-    const form = document.getElementById('editItemForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const requiredFields = form.querySelectorAll('[required]');
-            let valid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    valid = false;
-                    field.classList.add('border-red-500');
-                } else {
-                    field.classList.remove('border-red-500');
-                }
-            });
-            
-            if (!valid) {
-                e.preventDefault();
-                alert('Harap isi semua field yang wajib diisi!');
-            }
-        });
-    }
-});
 </script>
