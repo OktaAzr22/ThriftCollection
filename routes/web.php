@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\secondaryController;
 use App\Http\Controllers\TokoController;
 
@@ -17,17 +19,10 @@ Route::get('/index', function () {
 
 Route::resource('brands', BrandController::class);
 
-
-
-
-
 Route::get('/toko', [TokoController::class, 'index'])->name('toko.index');
 Route::post('/toko', [TokoController::class, 'store'])->name('toko.store');
 Route::put('/toko/{toko}', [TokoController::class, 'update'])->name('toko.update');
 Route::delete('/toko/{toko}', [TokoController::class, 'destroy'])->name('toko.destroy');
-
-
-
 
 Route::get('/master', [secondaryController::class, 'index'])->name('master.index');
 
@@ -52,3 +47,11 @@ Route::get('/brand/{id}/items', [BrandController::class, 'ajaxItems']);
 
 // detail item
 Route::get('/item/{id}/detail', [ItemController::class, 'ajaxDetail']);
+
+
+Route::get('/items/{item}', function(App\Models\Item $item){
+    return response()->json($item);
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+

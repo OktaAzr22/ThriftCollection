@@ -351,7 +351,7 @@
                                 <input type="text" placeholder="Cari produk..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                             </div>
-                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
+                            <button id="openDrawerBtn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
                                 <i class="fas fa-file-pdf mr-2"></i>
                                 Download PDF
                             </button>
@@ -1246,6 +1246,168 @@
         </div>
     </div>
 
+    <!-- Drawer untuk Tambah Produk -->
+    <div id="productDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <!-- Overlay -->
+        <div id="drawerOverlay" class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"></div>
+        
+        <!-- Drawer Panel -->
+        <div class="absolute inset-y-0 right-0 max-w-full flex">
+            <div class="relative w-screen max-w-md transform transition-transform duration-300 ease-in-out translate-x-full">
+                <div class="h-full flex flex-col bg-white shadow-xl">
+                    <!-- Header Drawer -->
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Tambah Produk Baru</h2>
+                        <button id="closeDrawerBtn" class="text-gray-400 hover:text-gray-500 transition-colors duration-200">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Form Content -->
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <form id="productForm" class="space-y-6">
+                            <!-- Nama Produk -->
+                            <div>
+                                <label for="productName" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk</label>
+                                <input type="text" id="productName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan nama produk">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Warna</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="condition" value="Baik" class="h-4 w-4 text-primary focus:ring-primary border-gray-300">
+                                        <span class="ml-2 text-sm text-gray-700">Baik</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="condition" value="Sangat Baik" class="h-4 w-4 text-primary focus:ring-primary border-gray-300">
+                                        <span class="ml-2 text-sm text-gray-700">Sangat Baik</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="condition" value="Bekas Pakai" class="h-4 w-4 text-primary focus:ring-primary border-gray-300">
+                                        <span class="ml-2 text-sm text-gray-700">Bekas Pakai</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="condition" value="Seperti Baru" class="h-4 w-4 text-primary focus:ring-primary border-gray-300">
+                                        <span class="ml-2 text-sm text-gray-700">Seperti Baru</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Harga -->
+                            <div>
+                                <label for="productPrice" class="block text-sm font-medium text-gray-700 mb-1">Harga</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500">Rp</span>
+                                    </div>
+                                    <input type="number" id="productPrice" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="productongkir" class="block text-sm font-medium text-gray-700 mb-1">ongkir</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500">Rp</span>
+                                    </div>
+                                    <input type="number" id="productPrice" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0">
+                                </div>
+                            </div>
+                            
+                            <!-- Brand -->
+                            <div>
+                                <label for="productBrand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                                <select id="productBrand" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Pilih Brand</option>
+                                    <option value="Levi's">Levi's</option>
+                                    <option value="Nike">Nike</option>
+                                    <option value="Coach">Coach</option>
+                                    <option value="Uniqlo">Uniqlo</option>
+                                    <option value="H&M">H&M</option>
+                                    <option value="Adidas">Adidas</option>
+                                    <option value="Zara">Zara</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="productBrand" class="block text-sm font-medium text-gray-700 mb-1">warna</label>
+                                <select id="productBrand" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Pilih warna</option>
+                                    <option value="Levi's">Levi's</option>
+                                    <option value="Nike">Nike</option>
+                                    <option value="Coach">Coach</option>
+                                    <option value="Uniqlo">Uniqlo</option>
+                                    <option value="H&M">H&M</option>
+                                    <option value="Adidas">Adidas</option>
+                                    <option value="Zara">Zara</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Store -->
+                            <div>
+                                <label for="productStore" class="block text-sm font-medium text-gray-700 mb-1">Store</label>
+                                <select id="productStore" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Pilih Store</option>
+                                    <option value="ThriftStore Bandung">ThriftStore Bandung</option>
+                                    <option value="SecondStyle Jakarta">SecondStyle Jakarta</option>
+                                    <option value="VintageCorner Surabaya">VintageCorner Surabaya</option>
+                                    <option value="RetroMart Yogyakarta">RetroMart Yogyakarta</option>
+                                    <option value="SecondChance Bali">SecondChance Bali</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="kategori" class="block text-sm font-medium text-gray-700 mb-1">kategori</label>
+                                <select id="productStore" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Pilih kategori</option>
+                                    <option value="ThriftStore Bandung">baju</option>
+                                    <option value="SecondStyle Jakarta">celana</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            
+                            
+                            <!-- Deskripsi -->
+                            <div>
+                                <label for="productDescription" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+                                <textarea id="productDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan deskripsi produk"></textarea>
+                            </div>
+                            
+                            <!-- Upload Gambar -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Gambar Produk</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                                    <div class="space-y-1 text-center">
+                                        <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl"></i>
+                                        <div class="flex text-sm text-gray-600">
+                                            <label for="productImage" class="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-blue-500 focus-within:outline-none">
+                                                <span>Upload gambar</span>
+                                                <input id="productImage" type="file" class="sr-only" accept="image/*">
+                                            </label>
+                                            <p class="pl-1">atau drag & drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">PNG, JPG, GIF hingga 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Footer Drawer -->
+                    <div class="flex-shrink-0 px-6 py-4 border-t border-gray-200 flex justify-end space-x-3">
+                        <button id="cancelBtn" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200">
+                            Batal
+                        </button>
+                        <button id="saveBtn" type="button" class="px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200">
+                            Simpan Produk
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Menambahkan interaktivitas pada sidebar
         document.addEventListener('DOMContentLoaded', function() {
@@ -1609,6 +1771,68 @@
                 
                 calculateTotalPrice();
             }
+        });
+
+        // JavaScript untuk mengontrol drawer
+        document.addEventListener('DOMContentLoaded', function() {
+            const drawer = document.getElementById('productDrawer');
+            const openDrawerBtn = document.getElementById('openDrawerBtn');
+            const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const drawerOverlay = document.getElementById('drawerOverlay');
+            const saveBtn = document.getElementById('saveBtn');
+            
+            // Fungsi untuk membuka drawer
+            function openDrawer() {
+                drawer.classList.remove('hidden');
+                // Delay untuk memastikan elemen sudah ditampilkan sebelum animasi
+                setTimeout(() => {
+                    drawerOverlay.classList.add('opacity-100');
+                    document.querySelector('.relative.w-screen').classList.remove('translate-x-full');
+                }, 10);
+            }
+            
+            // Fungsi untuk menutup drawer
+            function closeDrawer() {
+                drawerOverlay.classList.remove('opacity-100');
+                document.querySelector('.relative.w-screen').classList.add('translate-x-full');
+                // Tunggu animasi selesai sebelum menyembunyikan drawer
+                setTimeout(() => {
+                    drawer.classList.add('hidden');
+                }, 300);
+            }
+            
+            // Event listener untuk tombol buka drawer
+            openDrawerBtn.addEventListener('click', openDrawer);
+            
+            // Event listener untuk tombol tutup drawer
+            closeDrawerBtn.addEventListener('click', closeDrawer);
+            cancelBtn.addEventListener('click', closeDrawer);
+            drawerOverlay.addEventListener('click', closeDrawer);
+            
+            // Event listener untuk tombol simpan
+            saveBtn.addEventListener('click', function() {
+                // Validasi form
+                const productName = document.getElementById('productName').value;
+                const productPrice = document.getElementById('productPrice').value;
+                const productBrand = document.getElementById('productBrand').value;
+                const productStore = document.getElementById('productStore').value;
+                const condition = document.querySelector('input[name="condition"]:checked');
+                
+                if (!productName || !productPrice || !productBrand || !productStore || !condition) {
+                    alert('Harap lengkapi semua field yang wajib diisi!');
+                    return;
+                }
+                
+                // Di sini Anda bisa menambahkan kode untuk menyimpan data produk
+                // Misalnya mengirim data ke server atau menambahkannya ke tabel
+                
+                alert('Produk berhasil ditambahkan!');
+                closeDrawer();
+                
+                // Reset form
+                document.getElementById('productForm').reset();
+            });
         });
     </script>
 </body>

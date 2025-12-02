@@ -9,7 +9,7 @@
             <div class="p-4 flex-1 overflow-y-auto ">
                 <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Menu</div>
                 <nav class="space-y-1">
-                    <a href="#" class=" flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+                    <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard.*') ? 'text-primary bg-blue-50' : 'text-gray-700 hover:bg-gray-50' }} flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
                         <i class="fas fa-tachometer-alt w-5 mr-3"></i>
                         <span>Dashboard</span>
                     </a>

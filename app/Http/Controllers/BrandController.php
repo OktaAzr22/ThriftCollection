@@ -14,8 +14,8 @@ class BrandController extends Controller
         $search = $request->input('search');
 
         $brands = Brand::withCount('items')
-            ->when($search, function ($query, $search) {
-                $query->where('name', 'like', '%' . $search . '%');
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
             })
             ->latest()
             ->paginate(5)
@@ -23,6 +23,9 @@ class BrandController extends Controller
 
         return view('brands.index', compact('brands', 'search'));
     }
+
+
+    
 
     public function store(Request $request)
     {

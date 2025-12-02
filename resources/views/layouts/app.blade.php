@@ -286,7 +286,9 @@
 
             deleteBtn.classList.add('hidden');
         }
-</script>
 
+        
+</script>
+<script src="{{ asset('js/search-helper.js') }}"></script>
 </body>
 </html>

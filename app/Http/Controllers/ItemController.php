@@ -112,7 +112,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return view('items.edit', [
+        return view('items.edit-drawer', [
             'item' => $item,
             'tokos' => Toko::all(),
             'brands' => Brand::all(),
@@ -124,7 +124,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Item $item)
+  public function update(Request $request, Item $item)
 {
     $data = $request->validate([
         'nama'        => 'required|string|max:255',
@@ -135,7 +135,6 @@ class ItemController extends Controller
         'kategori_id' => 'required|exists:kategoris,id',
         'gambar'      => 'nullable|image|max:2048',
         'deskripsi'   => 'nullable|string',
-        'id_color' => 'nullable|exists:colors,id_color',
         'tanggal'     => 'nullable|date',
     ]);
 
@@ -163,6 +162,7 @@ class ItemController extends Controller
     return redirect()->route('items.index')->with('success', 'Items berhasil diperbarui.');
 }
 
+
     /**
      * Remove the specified resource from storage.
      */
@@ -179,12 +179,12 @@ class ItemController extends Controller
 
     
 
-public function ajaxDetail($id)
-{
-    $item = Item::with(['kategori','brand','color'])->findOrFail($id);
-    $item->total = $item->harga + ($item->ongkir ?? 0);
+    public function ajaxDetail($id)
+    {
+        $item = Item::with(['kategori','brand','color'])->findOrFail($id);
+        $item->total = $item->harga + ($item->ongkir ?? 0);
 
-    return view('partials.item-detail', compact('item'));
-}
+        return view('partials.item-detail', compact('item'));
+    }
 
 }

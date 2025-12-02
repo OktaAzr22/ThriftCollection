@@ -10,12 +10,33 @@
 
 <div class="bg-white rounded-lg shadow p-6 mb-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-      <h2 class="text-lg font-bold text-gray-900">Daftar Brand</h2>
+        <h2 class="text-lg font-bold text-gray-900">Daftar Brand</h2>
         <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
           <div class="relative w-full md:w-64">
-            <input type="text" placeholder="Cari brand..."
-              class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+            <form method="GET" action="{{ route('brands.index') }}" class="relative w-full md:w-64">
+                <input class="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" 
+                    type="text"
+                    id="searchInput"
+                    name="search"
+                    value="{{ request('search') }}"
+                    data-skeleton-id="brandSkeleton"
+                    data-table-id="tableBody"
+                    data-base-url="{{ route('brands.index') }}"
+                    oninput="startSearchLoading(this); this.form.submit()"
+                    placeholder="Cari brand..."
+                >
+
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+
+                @if(request('search'))
+                    <button type="button" data-target-input="#searchInput"
+                    data-base-url="{{ route('brands.index') }}"
+                    onclick="clearSearch(this)"
+                        class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                @endif
+            </form>
           </div>
 
           <button onclick="openModal('modalTambahBrand')"
@@ -24,8 +45,14 @@
           </button>
         </div>
     </div>
-
+    
     <div class="overflow-x-auto rounded-lg">
+        @if(request('search'))
+            <p class="text-sm text-gray-600 mb-3">
+                Menampilkan hasil untuk: 
+                <span class="font-semibold">"{{ request('search') }}"</span>
+            </p>
+        @endif
         <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead class="bg-gray-50 font-semibold text-gray-600 uppercase">
                 <tr>
@@ -37,52 +64,66 @@
                 </tr>
             </thead>
 
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($brands as $brand)
-                    <tr class="hover:bg-gray-50 transition duration-150">
-                        <td class="px-6 py-4">
-                            @if($brand->image)
-                                <img src="{{ asset('storage/' . $brand->image) }}"
-                                    class="h-14 w-14 rounded-md object-cover shadow-sm">
-                            @else
-                                <span class="text-gray-400">No Image</span>
-                            @endif
-                        </td>
+            <x-skeleton-table id="brandSkeleton" :cols="5" :rows="5" class="mt-6 w-full" />
 
-                        <td class="px-6 py-4 font-medium text-gray-900">
-                            {{ $brand->name }}
-                        </td>
+            <tbody id="tableBody"  class="bg-white divide-y divide-gray-200">
+                @if($brands->count() > 0)
+                    @foreach($brands as $brand)
+                        <tr class="hover:bg-gray-50 transition duration-150">
+                            <td class="px-6 py-4">
+                                @if($brand->image)
+                                    <img src="{{ asset('storage/' . $brand->image) }}"
+                                        class="h-14 w-14 rounded-md object-cover shadow-sm">
+                                @else
+                                    <span class="text-gray-400">No Image</span>
+                                @endif
+                            </td>
 
-                        <td class="px-6 py-4 text-gray-600">
-                            {{ $brand->brand_origin }}
-                        </td>
+                            <td class="px-6 py-4 font-medium text-gray-900">
+                                {{ $brand->name }}
+                            </td>
 
-                        <td class="px-6 py-4 text-gray-700 font-semibold">
-                            {{ $brand->items_count }}
-                        </td>
+                            <td class="px-6 py-4 text-gray-600">
+                                {{ $brand->brand_origin }}
+                            </td>
 
-                        <td class="px-6 py-4">
-                            <div class="flex justify-center space-x-3">        
-                                <button onclick="bukaModal('global-modal', '/brand/{{ $brand->id }}/items')"  class="p-2 hover:bg-blue-100 text-blue-600 rounded-md" title="Lihat Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="p-2 hover:bg-red-100 text-red-600 rounded-md"
-                                        onclick="openDeleteModal(
-                                            '{{ route('brands.destroy', $brand->id) }}', 
-                                            'BRAND', 
-                                            '{{ $brand->name }}'
-                                        )">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                                <button onclick="openModal('modalEditBrand-{{ $brand->id }}')"
-                                        class="p-2 hover:bg-yellow-100 text-yellow-600 rounded-md" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
+                            <td class="px-6 py-4 text-gray-700 font-semibold">
+                                {{ $brand->items_count }}
+                            </td>
+
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center space-x-3">        
+                                    <button onclick="bukaModal('global-modal', '/brand/{{ $brand->id }}/items')"  class="p-2 hover:bg-blue-100 text-blue-600 rounded-md" title="Lihat Detail">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 hover:bg-red-100 text-red-600 rounded-md"
+                                            onclick="openDeleteModal(
+                                                '{{ route('brands.destroy', $brand->id) }}', 
+                                                'BRAND', 
+                                                '{{ $brand->name }}'
+                                            )">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button onclick="openModal('modalEditBrand-{{ $brand->id }}')"
+                                            class="p-2 hover:bg-yellow-100 text-yellow-600 rounded-md" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="5" class="py-4 text-center text-red-500 font-semibold">
+                            ⚠️ Data tidak ditemukan untuk pencarian:
+                            "<span class="font-bold">{{ request('search') }}</span>"
                         </td>
                     </tr>
-                @endforeach
+                @endif
+                
             </tbody>
+            
+
             @foreach ($brands as $brand)
                 <x-modal 
                     id="modalEditBrand-{{ $brand->id }}"
@@ -205,4 +246,7 @@
 
   <x-modal-ajax id="global-modal" title="Data Brand" />
 
+
 @endsection
+
+

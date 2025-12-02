@@ -78,7 +78,9 @@
                     </td>
                     <td class="px-4 py-4">
                         <div class="flex space-x-2">
-                            <button class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors duration-200" title="Edit">
+                           <button onclick="openEditDrawer('{{ route('items.edit', $item->id) }}')" 
+                                    class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors duration-200" 
+                                    title="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
                             
@@ -124,4 +126,123 @@
         </div>
     </div>
 </div> 
+
+<!-- Drawer Edit Item -->
+<div id="editDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/50 transition-opacity duration-300"
+         onclick="closeEditDrawer()"></div>
+
+    <!-- Drawer Panel -->
+    <div class="absolute right-0 top-0 h-full w-full md:w-[600px] bg-white shadow-2xl 
+                transform translate-x-full transition-transform duration-300 ease-in-out
+                flex flex-col"
+         id="editDrawerPanel">
+
+        <!-- Header -->
+        <div class="flex-shrink-0 flex justify-between items-center p-4 md:p-6 border-b border-gray-200">
+            <h2 class="text-lg md:text-xl font-bold text-gray-800">Edit Item</h2>
+            <button onclick="closeEditDrawer()" 
+                    class="text-gray-600 hover:text-red-500 text-xl md:text-2xl p-1 hover:bg-gray-100 rounded-full transition-colors duration-200">
+                ✕
+            </button>
+        </div>
+
+        <!-- AJAX Loaded Content -->
+        <div id="editDrawerContent" class="flex-1 overflow-y-auto p-4 md:p-6">
+            <!-- Loading State -->
+            <div class="flex items-center justify-center h-full">
+                <div class="text-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
+                    <p class="text-gray-500 text-sm">Memuat form...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function openEditDrawer(url) {
+    const drawer = document.getElementById("editDrawer");
+    const panel = document.getElementById("editDrawerPanel");
+    const content = document.getElementById("editDrawerContent");
+
+    // Reset scroll position
+    content.scrollTop = 0;
+    
+    // Tampilkan drawer dengan animasi
+    drawer.classList.remove("hidden");
+    setTimeout(() => panel.classList.remove("translate-x-full"), 10);
+
+    // Tampilkan loading state
+    content.innerHTML = `
+        <div class="flex items-center justify-center h-full">
+            <div class="text-center">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
+                <p class="text-gray-500 text-sm">Memuat form...</p>
+            </div>
+        </div>
+    `;
+
+    // Fetch data
+    fetch(url)
+        .then(res => {
+            if (!res.ok) throw new Error('Network response was not ok');
+            return res.text();
+        })
+        .then(html => {
+            content.innerHTML = html;
+            // Prevent form submission dari menutup drawer
+            const form = content.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    // Optional: bisa tambahkan AJAX form submission di sini
+                    // atau biarkan form submit seperti biasa
+                });
+            }
+        })
+        .catch(() => {
+            content.innerHTML = `
+                <div class="flex items-center justify-center h-full">
+                    <div class="text-center p-4">
+                        <div class="text-red-500 text-4xl mb-3">⚠️</div>
+                        <p class="text-red-600 font-medium mb-2">Error memuat form</p>
+                        <p class="text-gray-500 text-sm mb-4">Coba refresh halaman atau cek koneksi internet</p>
+                        <button onclick="closeEditDrawer()" 
+                                class="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+}
+
+function closeEditDrawer() {
+    const drawer = document.getElementById("editDrawer");
+    const panel = document.getElementById("editDrawerPanel");
+    panel.classList.add("translate-x-full");
+    setTimeout(() => {
+        drawer.classList.add("hidden");
+        // Clear content setelah drawer tertutup
+        document.getElementById("editDrawerContent").innerHTML = `
+            <div class="flex items-center justify-center h-full">
+                <div class="text-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
+                    <p class="text-gray-500 text-sm">Memuat form...</p>
+                </div>
+            </div>
+        `;
+    }, 300);
+}
+
+// Close drawer dengan tombol ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !document.getElementById("editDrawer").classList.contains("hidden")) {
+        closeEditDrawer();
+    }
+});
+</script>
+
 @endsection
