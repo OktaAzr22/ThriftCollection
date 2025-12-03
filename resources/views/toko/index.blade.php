@@ -10,11 +10,11 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <h2 class="text-lg font-bold text-gray-900">Data Pengiriman</h2>
 
-        <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+        <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto items-center">
             
 
             <form method="GET" action="{{ route('toko.index') }}" class="relative w-full md:w-64">
-                <input class="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" 
+                <input class="px-10 py-2 w-full text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-primary focus:border-primary" 
                     type="text"
                     id="searchInput"
                     name="search"
@@ -26,7 +26,7 @@
                     placeholder="Cari data..."
                 >
 
-                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
 
                 @if(request('search'))
                     <button type="button" data-target-input="#searchInput"

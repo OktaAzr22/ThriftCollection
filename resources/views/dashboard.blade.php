@@ -92,9 +92,7 @@
                                         <div class="text-sm text-gray-900">{{ $item->kategori->nama ?? '-' }}</div>
                                     </td>
                                     <td class="px-4 py-4">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                            {{ $item->brand->name ?? '-' }}
-                                        </span>
+                                        <x-brand-badge :brand="$item->brand" />
                                     </td>
                                     <td class="px-4 py-4 text-sm text-gray-900">
                                         {{ $item->toko->asal ?? $item->toko->nama_toko ?? '-' }}

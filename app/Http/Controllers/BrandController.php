@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Color;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -12,16 +13,18 @@ class BrandController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $colors = Color::all();
 
-        $brands = Brand::withCount('items')
+        $brands = Brand::with(['color'])
+            ->withCount('items')
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(2)
+            ->paginate(5)
             ->withQueryString();
 
-        return view('brands.index', compact('brands', 'search'));
+        return view('brands.index', compact('brands', 'search', 'colors'));
     }
 
 
@@ -34,6 +37,7 @@ class BrandController extends Controller
                 'name'  => 'required|string|min:2|max:255',
                 'brand_origin' => 'nullable|string|max:255',
                 'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'id_color' => 'nullable|exists:colors,id_color'
             ]);
 
             $imagePath = null;
@@ -46,6 +50,7 @@ class BrandController extends Controller
                 'name'  => $request->name,
                 'brand_origin' =>$request->brand_origin,
                 'image' => $imagePath,
+                'id_color'      => $request->id_color,
             ]);
 
             return redirect()->back()->with('success', 'Brand berhasil ditambahkan.');
@@ -64,30 +69,32 @@ class BrandController extends Controller
     }
 
     public function update(Request $request, Brand $brand)
-{
-    $request->validate([
-        'name'          => 'required|string|max:255',
-        'brand_origin'  => 'nullable|string|max:255',
-        'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    {
+        $request->validate([
+            'name'          => 'required|string|max:255',
+            'brand_origin'  => 'nullable|string|max:255',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'id_color' => 'nullable|exists:colors,id_color'
+        ]);
 
-    $imagePath = $brand->image;
+        $imagePath = $brand->image;
 
-    if ($request->hasFile('image')) {
-        if ($imagePath) {
-            Storage::disk('public')->delete($imagePath);
+        if ($request->hasFile('image')) {
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+            $imagePath = $request->file('image')->store('brands', 'public');
         }
-        $imagePath = $request->file('image')->store('brands', 'public');
+
+        $brand->update([
+            'name'          => $request->name,
+            'brand_origin'  => $request->brand_origin,
+            'image'         => $imagePath,
+            'id_color' => $request->id_color,
+        ]);
+
+        return redirect()->back()->with('success', 'Brand berhasil diperbarui.');
     }
-
-    $brand->update([
-        'name'          => $request->name,
-        'brand_origin'  => $request->brand_origin,
-        'image'         => $imagePath,
-    ]);
-
-    return redirect()->back()->with('success', 'Brand berhasil diperbarui.');
-}
 
 
     public function destroy(Brand $brand)

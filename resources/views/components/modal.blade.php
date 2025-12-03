@@ -11,10 +11,10 @@
             transition-opacity duration-300 ease-in-out opacity-0">
 
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4
-                transform transition-all duration-300 scale-95">
+                transform transition-all duration-300 scale-95 ">
 
         <!-- HEADER -->
-        <div class="flex justify-between items-center p-6 border-b">
+        <div class="flex justify-between items-center p-6 border-b sticky top-0 bg-white z-10 rounded-t-xl">
             <h3 class="text-lg font-semibold text-gray-900">{{ $title }}</h3>
             <button type="button" 
                     class="text-gray-400 hover:text-gray-600 transition-colors duration-200 closeModal"
@@ -24,28 +24,32 @@
             </button>
         </div>
 
-        <!-- FORM -->
-        <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="p-6" id="{{ $id }}Form">
-            @csrf
+        <div class="max-h-[70vh] overflow-y-auto px-6 pb-6">
+            <!-- FORM -->
+            <form action="{{ $action }}" method="POST" enctype="multipart/form-data"  id="{{ $id }}Form">
+                @csrf
 
-            @if (strtoupper($method) !== 'POST')
-                @method($method)
-            @endif
+                @if (strtoupper($method) !== 'POST')
+                    @method($method)
+                @endif
 
-            {{ $slot }}
+                {{ $slot }}
 
-            <div class="flex justify-end space-x-3 mt-6">
-                <button type="button"
-                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition closeModal"
-                        data-id="{{ $id }}">
-                    Batal
-                </button>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button"
+                            class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition closeModal"
+                            data-id="{{ $id }}">
+                        Batal
+                    </button>
 
-                <button type="submit"
-                        class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition">
-                    Simpan
-                </button>
-            </div>
-        </form>
+                    <button type="submit"
+                            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
     </div>
 </div>

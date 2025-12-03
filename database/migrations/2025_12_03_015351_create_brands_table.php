@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('brands', function (Blueprint $table) {
@@ -13,10 +16,17 @@ return new class extends Migration
             $table->string('name');
             $table->string('brand_origin')->nullable();
             $table->string('image')->nullable();
+            $table->unsignedBigInteger('id_color')->nullable();
+            $table->foreign('id_color')
+                ->references('id_color')->on('colors')
+                ->onDelete('set null');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('brands');

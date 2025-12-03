@@ -17,4 +17,9 @@ class Color extends Model
     {
         return $this->hasMany(Item::class, 'id_color');
     }
+
+    public function brands()
+    {
+        return $this->hasMany(Item::class, 'id_color');
+    }
 }

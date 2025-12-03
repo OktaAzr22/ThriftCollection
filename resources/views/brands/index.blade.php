@@ -10,41 +10,47 @@
 
 <div class="bg-white rounded-lg shadow p-6 mb-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <h2 class="text-lg font-bold text-gray-900">Daftar Brand</h2>
-        <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-          <div class="relative w-full md:w-64">
-            <form method="GET" action="{{ route('brands.index') }}" class="relative w-full md:w-64">
-                <input class="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" 
-                    type="text"
-                    id="searchInput"
-                    name="search"
-                    value="{{ request('search') }}"
-                    data-skeleton-id="brandSkeleton"
-                    data-table-id="tableBody"
-                    data-base-url="{{ route('brands.index') }}"
-                    oninput="startSearchLoading(this); this.form.submit()"
-                    placeholder="Cari brand..."
-                >
+    <h2 class="text-lg font-bold text-gray-900">Daftar Brand</h2>
 
-                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+    <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto items-center">
 
-                @if(request('search'))
-                    <button type="button" data-target-input="#searchInput"
-                    data-base-url="{{ route('brands.index') }}"
-                    onclick="clearSearch(this)"
-                        class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
-                        <i class="fas fa-times"></i>
-                    </button>
-                @endif
-            </form>
-          </div>
+        <form method="GET" action="{{ route('brands.index') }}" class="relative w-full md:w-64">
+            <input 
+                class="px-10 py-2 w-full text-sm border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-primary focus:border-primary"
+                type="text"
+                id="searchInput"
+                name="search"
+                value="{{ request('search') }}"
+                data-skeleton-id="brandSkeleton"
+                data-table-id="tableBody"
+                data-base-url="{{ route('brands.index') }}"
+                oninput="startSearchLoading(this); this.form.submit()"
+                placeholder="Cari brand..."
+            >
 
-          <button onclick="openModal('modalTambahBrand')"
-                  class="px-3 py-2 bg-primary text-white rounded-lg">
-              + Tambah Brand
-          </button>
-        </div>
+            <!-- Icon Search -->
+            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+            <!-- Tombol Clear Search -->
+            @if(request('search'))
+            <button 
+                type="button"
+                data-target-input="#searchInput"
+                data-base-url="{{ route('brands.index') }}"
+                onclick="clearSearch(this)"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+            @endif
+        </form>
+
+        <button onclick="openModal('modalTambahBrand')"
+            class="px-3 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition">
+            + Tambah Brand
+        </button>
     </div>
+</div>
+
     
     <div class="overflow-x-auto rounded-lg">
         @if(request('search'))
@@ -151,6 +157,35 @@
                     </div>
 
                     <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700 mb-2">Warna Brand</label>
+
+    <div class="grid grid-cols-2 gap-y-3">
+        @foreach ($colors as $color)
+            <label class="flex items-center gap-2 cursor-pointer">
+
+                <input type="radio"
+                    name="id_color"
+                    value="{{ $color->id_color }}"
+                    class="appearance-none w-4 h-4 border border-gray-400 rounded-full 
+                           checked:border-transparent 
+                           checked:bg-[{{ $color->hex }}]
+                           focus:outline-none focus:ring-2 focus:ring-offset-1
+                           transition-all duration-200"
+                    style="box-shadow: inset 0 0 0 3px white;"
+                    {{ old('id_color', $brand->id_color) == $color->id_color ? 'checked' : '' }}>
+
+                <span class="text-gray-700 text-sm">{{ $color->nama }}</span>
+            </label>
+        @endforeach
+    </div>
+
+    @error('id_color')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+</div>
+
+
+                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Brand</label>
 
                         <div
@@ -216,6 +251,37 @@
                 value="{{ old('brand_origin') }}" required placeholder="Masukkan Asal Brand">
           @error('brand_origin') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror
       </div>
+
+      <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700 mb-2">Warna Brand</label>
+
+    <div class="grid grid-cols-2 gap-y-3">
+        @foreach ($colors as $color)
+            <label class="flex items-center gap-4 cursor-pointer">
+
+                <input type="radio"
+                    name="id_color"
+                    value="{{ $color->id_color }}"
+                    class="appearance-none w-4 h-4 border border-gray-400 rounded-full 
+                           checked:border-transparent checked:bg-[{{ $color->hex }}] 
+                           focus:outline-none focus:ring-2 focus:ring-offset-1 
+                           transition-all duration-200 cursor-pointer"
+                    style="box-shadow: inset 0 0 0 3px white;"
+                    {{ old('id_color') == $color->id_color ? 'checked' : '' }}>
+
+                <span class="text-gray-700 text-sm">{{ $color->nama }}</span>
+            </label>
+        @endforeach
+    </div>
+
+    @error('id_color')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+</div>
+
+
+
+
 
       <!-- Upload gambar -->
       <div class="mb-4">

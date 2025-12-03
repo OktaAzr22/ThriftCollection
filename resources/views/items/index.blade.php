@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <x-modal-ajax id="global-modal" title="Detail Item" />
 
 <div class="bg-white rounded-xl shadow-soft p-6 mb-8">
@@ -93,13 +94,13 @@
                             <div class="text-sm font-medium text-gray-900">Rp {{ number_format($item->harga + $item->ongkir, 0, ',', '.') }}</div>
                         </td>
                         <td class="px-4 py-4">
-                            <div class="flex items-center">
-                                <div class="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-2">
-                                    <i class="fas fa-tag text-red-500 text-xs"></i>
-                                </div>
-                                <div class="text-sm text-gray-900">{{ $item->brand->name }}</div>
+                            <div class="flex flex-col space-y-1">
+
+                                <x-brand-badge :brand="$item->brand" />
+
                             </div>
                         </td>
+
                         <td class="px-4 py-4">
                             <div class="text-sm text-gray-900">{{ $item->toko->nama }}</div>
                         </td>

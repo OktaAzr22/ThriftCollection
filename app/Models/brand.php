@@ -9,7 +9,7 @@ class brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','brand_origin', 'image'];
+    protected $fillable = ['name','brand_origin', 'image', 'id_color'];
     
     public function getImageUrlAttribute()
     {
@@ -21,5 +21,10 @@ class brand extends Model
     public function items()
     {
         return $this->hasMany(Item::class, 'brand_id');
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class, 'id_color');
     }
 }
