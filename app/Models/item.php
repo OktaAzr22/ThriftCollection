@@ -36,6 +36,6 @@ class item extends Model
 
     public function color()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Color::class, 'id_color', 'id_color');
     }
 }

@@ -116,6 +116,7 @@
   @include('partials.header')
   
   <x-confirm-delete />
+  
 
   <div class="flex">
        
@@ -126,6 +127,7 @@
         <div class="flex-1 overflow-auto flex flex-col h-[calc(100vh-80px)]">
             <!-- Content -->
             <main class="p-6 flex-1 overflow-auto">
+                <x-breadcrumb />
                 @yield('content')
             </main>
 
@@ -286,6 +288,37 @@
 
             deleteBtn.classList.add('hidden');
         }
+
+
+        // logic btn save
+        document.addEventListener("click", function (e) {
+    let button = e.target.closest(".button-custom");
+    if (!button) return;
+
+    if (button.disabled) return;
+
+    let form = button.closest("form");
+    if (!form) return;
+
+    let loadingText = button.getAttribute("data-loading");
+
+    // Ambil elemen spinner & teks
+    let spinner = button.querySelector(".spinner");
+    let text = button.querySelector(".button-text");
+
+    // Tampilkan spinner dan teks loading
+    spinner.classList.remove("hidden");
+    text.textContent = loadingText;
+
+    button.disabled = true;
+
+    // Delay biar teks/spinner terlihat dulu
+    setTimeout(() => {
+        form.submit();
+    }, 120);
+});
+
+
 
         
 </script>

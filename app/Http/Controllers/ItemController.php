@@ -44,7 +44,7 @@ class ItemController extends Controller
         $toko = Toko::all();
         $colors = Color::all();
 
-        return view('items.index', compact('items', 'kategori', 'brand', 'toko', 'sort', 'direction'));
+        return view('items.index', compact('items', 'kategori', 'brand', 'toko', 'sort', 'direction', 'colors'));
     }
 
     /**

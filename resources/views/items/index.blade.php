@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
 <x-modal-ajax id="global-modal" title="Detail Item" />
 
 <div class="bg-white rounded-xl shadow-soft p-6 mb-8">

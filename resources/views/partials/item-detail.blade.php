@@ -66,9 +66,7 @@
 
                         <div>
                             <p class="text-xs text-gray-500">Brand</p>
-                            <div  class="inline-block bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm font-medium">
-                              {{ $item->brand->name }}
-                            </div>
+                            <x-brand-badge :brand="$item->brand" />
                         </div>
                     </div>
 

@@ -42,10 +42,7 @@
                         Batal
                     </button>
 
-                    <button type="submit"
-                            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition">
-                        Simpan
-                    </button>
+                    <x-button-custom label="Submit" loading="Processing..." />
                 </div>
             </form>
         </div>

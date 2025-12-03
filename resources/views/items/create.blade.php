@@ -221,9 +221,7 @@
                 <button type="button" id="prevStep3" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </button>
-                <button type="submit" class="px-6 py-2 bg-secondary text-white rounded-lg hover:bg-green-600 transition-colors duration-200 flex items-center">
-                    <i class="fas fa-check mr-2"></i> Simpan Produk
-                </button>
+                <x-button-custom label="Submit" loading="Processing..." />
             </div>
         </div>
     </form>

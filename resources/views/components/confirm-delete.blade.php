@@ -26,12 +26,11 @@
             <form id="deleteForm" method="POST">
                 @csrf
                 @method('DELETE')
-                <button 
-                    type="submit"
-                    class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white"
-                >
-                    Hapus
-                </button>
+                <x-button-custom 
+        label="Hapus" 
+        loading="Menghapus..." 
+        class="bg-red-600 hover:bg-red-700" 
+    />
             </form>
         </div>
     </div>
