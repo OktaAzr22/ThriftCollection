@@ -77,10 +77,7 @@
         @include('partials.sidebar')
         <main class="flex-1 overflow-y-auto p-6">
             <x-breadcrumb />
-            <button id="darkToggle" onclick="toggleDarkMode()" 
-                class="relative w-14 h-7 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors duration-300 flex items-center">
-                <span class="absolute w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-300 left-1 dark:translate-x-7"></span>
-            </button>
+            
             @yield('content')
         </main>
     </div>

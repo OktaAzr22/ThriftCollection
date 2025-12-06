@@ -51,7 +51,6 @@ class secondaryController extends Controller
     ]);
 
     if ($validator->fails()) {
-        // buka modal edit spesifik untuk ID kategori ini
         return redirect()->back()
                          ->withErrors($validator)
                          ->withInput()
@@ -98,7 +97,7 @@ class secondaryController extends Controller
         $color->update($request->only(['nama', 'hex']));
 
         return back()->with('success', 'Warna berhasil diperbarui');
-                    //  ->with('openModal', 'modalEditWarna-' . $color->id_color);
+                    
     }
 
     public function deleteColor(Color $color)

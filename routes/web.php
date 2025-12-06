@@ -11,9 +11,7 @@ Route::get('/', function () {
     return view('token'); 
 })->name('token.form');
 
-Route::get('/test', function() {
-    return view ('test');
-});
+
 
 Route::post('/set-token', function (Illuminate\Http\Request $request) {
     $request->validate(['token' => 'required']);

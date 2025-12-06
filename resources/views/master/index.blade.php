@@ -6,10 +6,6 @@
     <h2 class="text-lg font-bold text-gray-900 mb-6">Manajemen Data</h2>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        {{-- =======================
-            TABLE KATEGORI
-        ======================== --}}
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-md font-semibold text-gray-800">Kategori</h3>
@@ -20,66 +16,63 @@
                 </button>
             </div>
 
-            <div class="overflow-x-auto rounded-lg border border-gray-200">
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Nama Kategori
-                </th>
+            <div class="overflow-x-auto rounded-lg border border-gray-200 max-h-80 overflow-y-auto no-scrollbar">
+            <table class="min-w-full border-collapse">
+                <thead class="sticky top-0 z-10 bg-white dark:bg-gray-900">
+                    <tr class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                        <th class="px-5 py-3 text-left text-sm font-semibold">
+                            Nama Kategori
+                        </th>
 
-                {{-- Kolom aksi rata tengah --}}
-                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Aksi
-                </th>
-            </tr>
-        </thead>
+                        {{-- Kolom aksi rata tengah --}}
+                        <th class="px-5 py-3 text-left text-sm font-semibold">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
 
-        <tbody class="bg-white divide-y divide-gray-200">
-            @foreach ($kategoris as $kategori)
-                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                <tbody class="text-gray-600 dark:text-gray-300">
+                    @foreach ($kategoris as $kategori)
+                        <tr class="hover:bg-gray-50 transition-colors duration-150">
 
-                    <td class="px-4 py-3">
-                        <div class="text-sm font-medium text-gray-900">
-                            {{ $kategori->nama }}
-                        </div>
-                    </td>
+                            <td class="px-4 py-3">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{ $kategori->nama }}
+                                </div>
+                            </td>
 
-                    {{-- Aksi di tengah --}}
-                    <td class="px-4 py-3">
-                        <div class="flex justify-center space-x-3">
+                            {{-- Aksi di tengah --}}
+                            <td class="px-4 py-3">
+                                <div class="flex justify-center space-x-3">
 
-                            {{-- Edit --}}
-                            <button onclick="openModal('modalEditKategori-{{ $kategori->id }}')"
-                                class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded transition-colors duration-200">
-                                <i class="fas fa-edit"></i>
-                            </button>
+                                    {{-- Edit --}}
+                                    <button onclick="openModal('modalEditKategori-{{ $kategori->id }}')"
+                                        class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded transition-colors duration-200">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
 
-                            {{-- Delete --}}
-                            <button onclick="openDeleteModal(
-                                    '{{ route('master.kategori.destroy', $kategori->id) }}',
-                                    'kategori',
-                                    '{{ $kategori->nama }}'
-                                )"
-                                class="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded transition-colors duration-200">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
+                                    {{-- Delete --}}
+                                    <button onclick="openDeleteModal(
+                                            '{{ route('master.kategori.destroy', $kategori->id) }}',
+                                            'kategori',
+                                            '{{ $kategori->nama }}'
+                                        )"
+                                        class="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded transition-colors duration-200">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
 
-                        </div>
-                    </td>
+                                </div>
+                            </td>
 
-                </tr>
-            @endforeach
-        </tbody>
+                        </tr>
+                    @endforeach
+                </tbody>
 
-    </table>
-</div>
+            </table>
+        </div>
 
         </div>
 
-        {{-- =======================
-            TABLE WARNA
-        ======================== --}}
         <div>
 
             <div class="flex justify-between items-center mb-4">
@@ -91,24 +84,24 @@
                 </button>
             </div>
 
-            <div class="overflow-x-auto rounded-lg border border-gray-200">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
+            <div class="overflow-x-auto rounded-lg border border-gray-200 max-h-80 overflow-y-auto no-scrollbar">
+                <table class="min-w-full border-collapse">
+                    <thead class="sticky top-0 z-10 bg-white dark:bg-gray-900">
+                        <tr class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                             <th class="px-4 py-3"></th>
 
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-5 py-3 text-left text-sm font-semibold">
                                 Nama Warna
                             </th>
 
                             {{-- Kolom Aksi rata tengah --}}
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-5 py-3 text-left text-sm font-semibold">
                                 Aksi
                             </th>
                         </tr>
                     </thead>
 
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="text-gray-600 dark:text-gray-300">
                         @foreach ($colors as $color)
                             <tr class="hover:bg-gray-50 transition-colors duration-150">
 
@@ -156,7 +149,6 @@
 
 
         </div>
-
     </div>
 </div>
 

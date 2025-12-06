@@ -7,8 +7,8 @@
 
 <!-- MODAL -->
 <div id="{{ $id }}" 
-     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden
-            transition-opacity duration-300 ease-in-out opacity-0">
+     class="fixed inset-0 bg-black/30 flex items-center justify-center z-50 hidden
+            transition-opacity duration-300 ease-in-out opacity-0 ">
 
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-4
                 transform transition-all duration-300 scale-95 ">

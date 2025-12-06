@@ -171,3 +171,32 @@
                 form.submit();
             }, 120);
         });  
+
+        const btnOpen = document.getElementById("openSetting");
+        const panel = document.getElementById("settingsPanel");
+        const overlay = document.getElementById("settingsOverlay");
+
+        btnOpen.addEventListener("click", () => {
+            const rect = btnOpen.getBoundingClientRect();
+
+            panel.style.top = rect.top + "px";
+            panel.style.left = rect.right + 12 + "px"; 
+
+            const isOpen = panel.classList.contains("scale-y-100");
+
+            if (isOpen) {
+                panel.classList.remove("scale-y-100");
+                panel.classList.add("scale-y-0");
+                overlay.classList.add("hidden");
+            } else {
+                panel.classList.remove("hidden");
+                setTimeout(() => panel.classList.add("scale-y-100"), 10);
+                overlay.classList.remove("hidden");
+            }
+        });
+
+        overlay.addEventListener("click", () => {
+            panel.classList.remove("scale-y-100");
+            panel.classList.add("scale-y-0");
+            overlay.classList.add("hidden");
+        });

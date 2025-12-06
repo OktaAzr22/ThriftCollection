@@ -6,7 +6,7 @@
     'segments' => request()->segments(),
 ])
 
-<div class="mb-6">
+<div class="mb-5">
     <nav class="flex justify-end" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
 
