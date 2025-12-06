@@ -3,8 +3,10 @@
 
 
 
-        <!-- Sidebar -->
-        <div class="w-64 bg-white shadow-lg flex flex-col h-[calc(100vh-80px)] sticky top-20">
+<div class="w-64 bg-white dark:bg-gray-950 shadow-lg h-screen sticky top-0 flex flex-col">
+
+
+
             <!-- Menu Section -->
             <div class="p-4 flex-1 overflow-y-auto ">
                 <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Menu</div>
@@ -29,6 +31,8 @@
                         <i class="fas fa-chart-bar w-5 mr-3"></i>
                         <span>Item</span>
                     </a>
+                   
+
                 </nav>
                 
                 <div class="mt-8">
@@ -38,9 +42,9 @@
                             <i class="fas fa-cog w-5 mr-3"></i>
                             <span>Pengaturan</span>
                         </a>
-                        <a href="#" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 transition-all duration-200 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+                        <a href="{{ route('token.logout') }}" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 transition-all duration-200 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
                             <i class="fas fa-question-circle w-5 mr-3"></i>
-                            <span>Bantuan</span>
+                            <span>logout</span>
                         </a>
                     </nav>
                 </div>
