@@ -7,7 +7,7 @@
 <div class="bg-white rounded-xl shadow-soft p-6 mb-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-xl font-bold text-gray-900">Data Produk</h2>
+            <h2 class="text-xl font-bold text-gray-900">Data Item</h2>
             <p class="text-sm text-gray-500 mt-1">Kelola produk thrift Anda di sini</p>
         </div>
         <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">

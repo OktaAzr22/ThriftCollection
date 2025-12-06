@@ -20,7 +20,7 @@ class BrandController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%");
             })
-            ->latest()
+            ->orderBy('items_count', 'desc')
             ->paginate(5)
             ->withQueryString();
 

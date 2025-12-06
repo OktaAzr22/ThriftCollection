@@ -4,33 +4,47 @@
 
 @section('content')
 <div class="bg-white rounded-lg shadow p-6 mb-8">
-    <div class="flex justify-between items-center mb-8">
-        <h2 class="text-xl font-bold text-gray-900">Buat Item Terbaru</h2>
-        
+    <div class="relative mb-8 flex items-center justify-center">
+        <a href="{{ route('items.index') }}" 
+            class="absolute left-0 text-gray-600 hover:text-gray-800 text-l">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2 class="text-xl font-bold text-gray-900 text-center">
+            Buat Item Terbaru
+        </h2>
     </div>
 
     <!-- Step Progress -->
     <div class="mb-8">
-        <div class="flex justify-between items-center relative">
-            <!-- Progress Line -->
-            <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
-            <div id="progressLine" class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-10 transition-all duration-500 ease-in-out" style="width: 0%"></div>
-            
-            <!-- Steps -->
-            <div class="step-item relative z-20 flex flex-col items-center">
-                <div class="step-number w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold transition-all duration-300">1</div>
-                <span class="mt-2 text-sm font-medium text-primary">Informasi Dasar</span>
-            </div>
-            <div class="step-item relative z-20 flex flex-col items-center">
-                <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold transition-all duration-300">2</div>
-                <span class="mt-2 text-sm font-medium text-gray-500">Kategori & Brand</span>
-            </div>
-            <div class="step-item relative z-20 flex flex-col items-center">
-                <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold transition-all duration-300">3</div>
-                <span class="mt-2 text-sm font-medium text-gray-500">Gambar & Detail</span>
-            </div>
+    <div class="max-w-xl mx-auto flex justify-between items-center relative">
+
+        <!-- Progress Line -->
+        <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
+        <div id="progressLine"
+             class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-10 transition-all duration-500 ease-in-out"
+             style="width: 0%">
         </div>
+
+        <!-- Steps -->
+        <div class="step-item relative z-20 flex flex-col items-center">
+            <div class="step-number w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</div>
+            <span class="mt-2 text-sm font-medium text-primary">Informasi Dasar</span>
+        </div>
+
+        <div class="step-item relative z-20 flex flex-col items-center">
+            <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">2</div>
+            <span class="mt-2 text-sm font-medium text-gray-500">Kategori & Brand</span>
+        </div>
+
+        <div class="step-item relative z-20 flex flex-col items-center">
+            <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">3</div>
+            <span class="mt-2 text-sm font-medium text-gray-500">Gambar & Detail</span>
+        </div>
+
     </div>
+</div>
+
+
 
     <!-- Form Steps -->
     <form id="productForm" action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
