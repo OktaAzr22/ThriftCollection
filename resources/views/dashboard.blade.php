@@ -77,7 +77,18 @@
                                     <td class="px-4 py-4">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-12 w-12 rounded-md object-cover" src="{{ $item->gambar ? asset('storage/' . $item->gambar) : asset('default-brand.png') }}" alt="{{ $item->nama }}">
+                                                @if ($item->gambar)
+    <img src="{{ asset('storage/' . $item->gambar) }}"
+         alt="{{ $item->nama }}"
+         class="h-12 w-12 rounded-md object-cover cursor-pointer hover:opacity-80 transition"
+         onclick="showImageModal('{{ asset('storage/' . $item->gambar) }}', '{{ $item->nama }}')">
+@else
+    <div class="h-12 w-12 rounded-md bg-gray-200 flex items-center justify-center text-xs text-gray-500">
+        null
+    </div>
+@endif
+
+
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">{{ $item->nama }}</div>
@@ -117,9 +128,39 @@
   
 
   
+      <x-modal 
+    id="modalPreviewGambar"
+    title=""
+    action="#"
+    method="GET"
+    noFooter="true">
+
+    <div class="flex justify-center">
+        <img id="previewImageFull" 
+             src="" 
+             alt="Preview"
+             class="max-w-full max-h-[70vh] rounded-lg mt-4">
+    </div>
+
+</x-modal>
+
+
       
-      
-      
+      <script>
+function showImageModal(src, nama) {
+    // Set gambar
+    document.getElementById('previewImageFull').src = src;
+
+    // Ganti judul modal TANPA edit component
+    const modal = document.getElementById('modalPreviewGambar');
+    const title = modal.querySelector('h3'); // ambil elemen utk title
+    if (title) title.textContent = nama;
+
+    // Buka modal
+    openModal('modalPreviewGambar');
+}
+</script>
+
                       
            
   

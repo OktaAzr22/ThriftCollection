@@ -6,7 +6,7 @@
 <button 
     type="submit"
     {{ $attributes->merge([
-        'class' => 'button-custom px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold inline-flex items-center gap-2'
+        'class' => 'button-custom px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold inline-flex items-center gap-2 cursor-pointer'
     ]) }}
     data-label="{{ $label }}"
     data-loading="{{ $loading }}"

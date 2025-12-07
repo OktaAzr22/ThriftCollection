@@ -244,7 +244,7 @@
       id="modalTambahBrand"
       title="Tambah Brand Baru"
       action="{{ route('brands.store') }}">
-      <div class="mb-4">
+      <div class="mb-4 mt-5">
           <label class="block text-sm font-medium text-gray-700 mb-2">Nama Brand</label>
           <input type="text" name="name"
                 class="w-full px-3 py-2 border rounded-lg"

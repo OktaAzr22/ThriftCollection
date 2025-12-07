@@ -2,7 +2,8 @@
     'id' => 'modal',
     'title' => 'Tambah Data',
     'action' => '#',
-    'method' => 'POST'
+    'method' => 'POST',
+    'noFooter' => false
 ])
 
 <!-- MODAL -->
@@ -35,6 +36,7 @@
 
                 {{ $slot }}
 
+                @if (!$noFooter)
                 <div class="flex justify-end space-x-3 mt-6">
                     <button type="button"
                             class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition closeModal"
@@ -44,6 +46,7 @@
 
                     <x-button-custom label="Submit" loading="Processing..." />
                 </div>
+                @endif
             </form>
         </div>
 
