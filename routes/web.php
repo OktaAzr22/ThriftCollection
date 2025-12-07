@@ -31,6 +31,10 @@ Route::middleware(['token'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    Route::get('/dashboard/cetak', [DashboardController::class, 'cetakPDF'])
+     ->name('dashboard.cetak');
+
+
     Route::resource('brands', BrandController::class);
 
     Route::get('/toko', [TokoController::class, 'index'])->name('toko.index');

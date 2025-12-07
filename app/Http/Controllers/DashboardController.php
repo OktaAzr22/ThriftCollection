@@ -7,7 +7,8 @@ use App\Models\item;
 use App\Models\kategori;
 use App\Models\toko;
 use Carbon\Carbon;  
-use PDF;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -54,6 +55,16 @@ class DashboardController extends Controller
             'recentItems',
             'totalRecent'
         ));
+    }
+
+public function cetakPDF()
+    {
+        $items = Item::with(['toko', 'brand', 'kategori', 'color'])->get();
+
+        $pdf = Pdf::loadView('master.pdf', compact('items'))
+                ->setPaper('a4', 'portrait');
+
+        return $pdf->stream('dashboard-items.pdf');
     }
 
     

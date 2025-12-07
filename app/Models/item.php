@@ -22,6 +22,11 @@ class item extends Model
         'tanggal',
     ];
 
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
+
+
     public function toko() {
         return $this->belongsTo(Toko::class);
     }

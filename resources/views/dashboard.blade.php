@@ -56,7 +56,10 @@
                 <div class="bg-white rounded-lg shadow p-6 mb-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                         <h2 class="text-lg font-bold text-gray-900">Item Terbaru</h2>
-                        
+                        <a href="{{ route('dashboard.cetak') }}"  target="_blank"
+   class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+   Cetak PDF
+</a>
                     </div>
                     
                     <div class="overflow-x-auto rounded-lg">
