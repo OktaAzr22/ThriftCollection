@@ -131,7 +131,7 @@
     title="Tambah Toko Baru"
     action="{{ route('toko.store') }}">
 
-    <div class="mb-4">
+    <div class="mb-4 mt-3">
         <label class="block text-sm font-medium text-gray-700 mb-2">Nama Toko</label>
         <input type="text" name="nama"
             class="w-full px-3 py-2 border rounded-lg" placeholder="Masukkan Nama Toko.."
@@ -181,7 +181,7 @@
         $isEditError = session('openModal') === 'modalEditToko'.$toko->id;
     @endphp
 
-    <div class="mb-4">
+    <div class="mb-4 mt-3">
         <label class="block text-sm font-medium text-gray-700 mb-2">Nama Toko</label>
         <input type="text"
                name="nama"

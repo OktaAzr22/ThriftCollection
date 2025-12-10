@@ -42,7 +42,7 @@ class secondaryController extends Controller
     public function updateKategori(Request $request, Kategori $kategori)
     {
         $validator = Validator::make($request->all(), [
-        'nama' => ['required','min:1','max:255', Rule::unique('kategoris','nama')->ignore($kategori->id)],
+        'nama' => ['required','min:2','max:255', Rule::unique('kategoris','nama')->ignore($kategori->id)],
     ], [
         'nama.required' => 'Nama kategori wajib diisi',
         'nama.min' => 'Nama kategori minimal 1 karakter',
@@ -62,15 +62,24 @@ class secondaryController extends Controller
     return redirect()->back()->with('success', 'Kategori berhasil diperbaruhi.');
     }
 
-    public function deleteKategori(kategori $kategori)
+    public function deleteKategori(Kategori $kategori)
     {
         try {
             $kategori->delete();
-            return back()->with('success', 'Kategori berhasil dihapus');
-        } catch (QueryException $e) {
-            return back()->with('alert', 'Kategori masih digunakan oleh item!');
+            return back()->with('success', 'Kategori berhasil dihapus.');
+        } 
+        catch (QueryException $e) {
+
+            // Jika ada constraint foreign key
+            if ($e->errorInfo[1] == 1451) {
+                return back()->with('warning', 'Kategori tidak dapat dihapus karena masih digunakan oleh item!');
+            }
+
+            // Error lain
+            return back()->with('error', 'Terjadi kesalahan saat menghapus kategori.');
         }
     }
+
 
     public function storeColor(Request $request)
     {
@@ -101,8 +110,17 @@ class secondaryController extends Controller
     }
 
     public function deleteColor(Color $color)
-    {
-        $color->delete();
-        return back()->with('success', 'Warna berhasil dihapus');
+{
+    if ($color->items()->exists() || $color->brands()->exists()) {
+        return back()->with(
+            'warning',
+            'Warna tidak dapat dihapus karena masih digunakan!'
+        );
     }
+
+    $color->delete();
+
+    return back()->with('success', 'Warna berhasil dihapus.');
+}
+
 }

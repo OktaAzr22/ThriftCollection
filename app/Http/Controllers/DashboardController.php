@@ -15,16 +15,60 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Item::with(['brand', 'kategori', 'toko'])->latest();
+        $query = Item::with(['brand', 'kategori', 'toko']);
 
-        // Filter pencarian berdasarkan nama item
-        if ($request->has('search') && $request->search != '') {
+        // ==========================
+        // SORT PRODUK (nama)
+        // ==========================
+        if ($request->sort === 'nama_asc') {
+            $query->orderBy('nama', 'asc');
+        } elseif ($request->sort === 'nama_desc') {
+            $query->orderBy('nama', 'desc');
+        }
+
+        // ==========================
+        // SORT HARGA
+        // ==========================
+        if ($request->harga === 'harga_asc') {
+            $query->orderBy('harga', 'asc');
+        } elseif ($request->harga === 'harga_desc') {
+            $query->orderBy('harga', 'desc');
+        }
+
+        // ==========================
+        // SORT DEFAULT (created_at)
+        // ==========================
+        if (!$request->sort && !$request->harga) {
+            // default terbaru
+            $query->orderBy('created_at', 'desc');
+        }
+
+        // ==========================
+        // FILTER KATEGORI
+        // ==========================
+        if ($request->kategori) {
+            $query->where('kategori_id', $request->kategori);
+        }
+
+        // ==========================
+        // FILTER BRAND
+        // ==========================
+        if ($request->brand) {
+            $query->where('brand_id', $request->brand);
+        }
+
+        // ==========================
+        // FILTER SEARCH
+        // ==========================
+        if ($request->search) {
             $query->where('nama', 'like', '%' . $request->search . '%');
         }
 
         $items = $query->paginate(5)->withQueryString();
 
-        // Data lainnya...
+        // ==========================
+        // DATA STATISTIK
+        // ==========================
         $totalBrands = Brand::count();
         $totalCategories = Kategori::count();
         $totalItems = Item::count();
@@ -34,12 +78,19 @@ class DashboardController extends Controller
 
         $tanggalBatas = Carbon::now()->subDays(5);
 
-        $recentBrands = brand::where('created_at', '>=', $tanggalBatas)->latest()->get();
-        $recentCategories = kategori::where('created_at', '>=', $tanggalBatas)->latest()->get();
-        $recentTokos = toko::where('created_at', '>=', $tanggalBatas)->latest()->get();
-        $recentItems = item::where('created_at', '>=', $tanggalBatas)->latest()->get();
+        $recentBrands = Brand::where('created_at', '>=', $tanggalBatas)->latest()->get();
+        $recentCategories = Kategori::where('created_at', '>=', $tanggalBatas)->latest()->get();
+        $recentTokos = Toko::where('created_at', '>=', $tanggalBatas)->latest()->get();
+        $recentItems = Item::where('created_at', '>=', $tanggalBatas)->latest()->get();
 
-        $totalRecent = $recentBrands->count() + $recentCategories->count() + $recentTokos->count() + $recentItems->count();
+        $totalRecent = 
+            $recentBrands->count() +
+            $recentCategories->count() +
+            $recentTokos->count() +
+            $recentItems->count();
+
+        $brands = Brand::all();
+        $kategoris = Kategori::all();
 
         return view('dashboard', compact(
             'totalBrands',
@@ -53,11 +104,13 @@ class DashboardController extends Controller
             'recentCategories',
             'recentTokos',
             'recentItems',
-            'totalRecent'
+            'totalRecent',
+            'brands',
+            'kategoris'
         ));
     }
 
-public function cetakPDF()
+    public function cetakPDF()
     {
         $items = Item::with(['toko', 'brand', 'kategori', 'color'])->get();
 
@@ -65,7 +118,5 @@ public function cetakPDF()
                 ->setPaper('a4', 'portrait');
 
         return $pdf->stream('dashboard-items.pdf');
-    }
-
-    
+    }   
 }

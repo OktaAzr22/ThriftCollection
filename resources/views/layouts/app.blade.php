@@ -79,7 +79,9 @@
             <x-breadcrumb />
             
             @yield('content')
+            
         </main>
+        
     </div>
     @stack('scripts')
     <script>

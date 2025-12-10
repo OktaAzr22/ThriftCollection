@@ -125,42 +125,41 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      */
   public function update(Request $request, Item $item)
-{
-    $data = $request->validate([
-        'nama'        => 'required|string|max:255',
-        'harga'       => 'required|numeric|min:0',
-        'ongkir'      => 'nullable|numeric|min:0',
-        'toko_id'     => 'required|exists:tokos,id',
-        'brand_id'    => 'required|exists:brands,id',
-        'kategori_id' => 'required|exists:kategoris,id',
-        'gambar'      => 'nullable|image|max:2048',
-        'deskripsi'   => 'nullable|string',
-        'tanggal'     => 'nullable|date',
-    ]);
+    {
+        $data = $request->validate([
+            'nama'        => 'required|string|max:255',
+            'harga'       => 'required|numeric|min:0',
+            'ongkir'      => 'nullable|numeric|min:0',
+            'toko_id'     => 'required|exists:tokos,id',
+            'brand_id'    => 'required|exists:brands,id',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'id_color'    => 'nullable|exists:colors,id_color',
+            'gambar'      => 'nullable|image|max:2048',
+            'deskripsi'   => 'nullable|string',
+            'tanggal'     => 'nullable|date',
+        ]);
 
-    // Handle hapus gambar
-    if ($request->filled('hapus_gambar') && $item->gambar) {
-        Storage::disk('public')->delete($item->gambar);
-        $data['gambar'] = null;
-    }
-
-    // Handle upload gambar baru
-    if ($request->hasFile('gambar')) {
-        if ($item->gambar && Storage::disk('public')->exists($item->gambar)) {
+        if ($request->filled('hapus_gambar') && $item->gambar) {
             Storage::disk('public')->delete($item->gambar);
+            $data['gambar'] = null;
         }
 
-        $namaFile = Str::slug($data['nama']) . '_' . time() . '.' .
-                    $request->file('gambar')->getClientOriginalExtension();
+        if ($request->hasFile('gambar')) {
+            if ($item->gambar && Storage::disk('public')->exists($item->gambar)) {
+                Storage::disk('public')->delete($item->gambar);
+            }
 
-        $data['gambar'] = $request->file('gambar')
-            ->storeAs('assets/img/uploads/gambar_item', $namaFile, 'public');
+            $namaFile = Str::slug($data['nama']) . '_' . time() . '.' .
+                        $request->file('gambar')->getClientOriginalExtension();
+
+            $data['gambar'] = $request->file('gambar')
+                ->storeAs('assets/img/uploads/gambar_item', $namaFile, 'public');
+        }
+
+        $item->update($data);
+
+        return redirect()->route('items.index')->with('success', 'Items berhasil diperbarui.');
     }
-
-    $item->update($data);
-
-    return redirect()->route('items.index')->with('success', 'Items berhasil diperbarui.');
-}
 
 
     /**

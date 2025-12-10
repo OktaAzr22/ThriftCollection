@@ -1,4 +1,4 @@
-<footer class="bg-white border-t border-gray-200 py-4 px-6">
+            <footer class="bg-yellow-600 border-t border-gray-200 py-4 px-6">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="text-sm text-gray-600 mb-2 md:mb-0">
                         &copy; {{ date('Y') }} Thriftting. All rights reserved.
