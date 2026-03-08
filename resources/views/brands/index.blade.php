@@ -10,7 +10,7 @@
 
     <div class="bg-white rounded-lg shadow p-6 ">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <h2 class="text-lg font-bold text-gray-900">Daftar Brand</h2>
+        <x-label>Email</x-label>
 
         <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto items-center">
 

@@ -18,51 +18,72 @@
     </script>
     <title>@yield('title', 'Thriftting - Dashboard')</title>
     @vite('resources/css/app.css')
-     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @stack('styles')
     <style>
-        * {
-            font-family: 'Inter', sans-serif;
+        @keyframes zoomIn {
+            0% { 
+                transform: scale(0.1); 
+                opacity: 0; 
+            }
+            60% { 
+                transform: scale(1.05); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
         }
-        .transition-max-height {
-            transition: max-height 0.3s ease-in-out;
+
+        @keyframes zoomOut {
+            0% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
+            40% { 
+                transform: scale(1.05); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: scale(0.1); 
+                opacity: 0; 
+            }
         }
-        .rotate-180 {
-            transform: rotate(180deg);
+
+        .animate-zoomIn {
+            animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-        .transition-rotate {
-            transition: transform 0.3s ease;
+
+        .animate-zoomOut {
+            animation: zoomOut 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            scroll-behavior: smooth;
         }
     </style>
     
 </head>
-<body class="bg-red-50">
-
+<body class="bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
     @include('components.alert')
-
+    @include('partials.header')
     <x-confirm-delete />
-
-    <div class="flex h-screen">
-
+    <div class="flex pt-20 h-screen overflow-hidden"> 
         @include('partials.sidebar')
-
-        <main class="flex-1 overflow-y-auto">
-
-            @include('partials.header')
-
-            <div class="p-5">
-
-                <x-breadcrumb />
-
-                @yield('content')
-   
-            </div>
+        <main class="flex-1 overflow-y-auto p-6">
+            <x-breadcrumb />
+            
+            @yield('content')
+            
         </main>
+        
     </div>
-
     @stack('scripts')
-
     <script>
         function toggleDarkMode() {
             const html = document.documentElement;
@@ -70,7 +91,6 @@
             localStorage.theme = isDark ? 'dark' : 'light';
         }
     </script>
-
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/search-helper.js') }}"></script>
 </body>
