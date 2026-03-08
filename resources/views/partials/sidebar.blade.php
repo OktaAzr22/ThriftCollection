@@ -1,74 +1,81 @@
 <aside class="w-72 bg-white border-r border-slate-200 flex flex-col">
-            <!-- Logo Section -->
-            <div class="p-6 border-b border-slate-200">
-                <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">D</span>
-                    </div>
-                    <h1 class="text-xl font-bold text-slate-800">Dashboard<span class="text-blue-600">.</span></h1>
-                </div>
+    <div class="p-6 border-b border-slate-200">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">D</span>
             </div>
+            <h1 class="text-xl font-bold text-slate-800">Dashboard<span class="text-blue-600">.</span></h1>
+        </div>
+    </div>
 
-            <!-- Sidebar Content -->
-            <div class="flex-1 overflow-y-auto py-6 px-4">
+    <div class="flex-1 overflow-y-auto py-6 px-4">
+        
+        <div class="mb-8">
+            <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 px-4">Main Menu</h3>
+            <nav class="space-y-1">
+                <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('dashboard') ? 'text-slate-700 bg-slate-100' : 'text-slate-600 hover:bg-slate-50' }}">
+                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('dashboard') ? 'text-blue-600' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    <span class="font-medium">Beranda</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition duration-200">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="font-medium">Kalender</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 px-4">Analytics</h3>
+            <nav class="space-y-1">
+                <a href="{{ route('items.index') }}" class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('items.*') ? 'text-slate-700 bg-slate-100' : 'text-slate-600 hover:bg-slate-50' }}">
+                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('items.*') ? 'text-blue-600' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <span class="font-medium">Overview</span>
+                </a>
                 
-                <!-- MAIN MENU -->
-                <div class="mb-8">
-                    <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 px-4">Main Menu</h3>
-                    <nav class="space-y-1">
-                        <a href="#" class="flex items-center px-4 py-3 text-slate-700 bg-slate-100 rounded-xl">
-                            <svg class="w-5 h-5 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                            </svg>
-                            <span class="font-medium">Beranda</span>
+                <div class="ml-4">
+                    <button onclick="toggleSubMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 rounded-lg transition duration-200">
+                        <span>Laporan</span>
+                        <svg id="reportsMenu-icon" class="w-4 h-4 transition-transform duration-200 {{ request()->routeIs('brands.*') || request()->routeIs('master.*') || request()->routeIs('toko.*') ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="reportsMenu" class="mt-2 space-y-1 overflow-hidden transition-all {{ request()->routeIs('brands.*') || request()->routeIs('master.*') || request()->routeIs('toko.*') ? 'max-h-96' : 'max-h-0' }}">
+                        <a href="{{ route('brands.index') }}" class="flex items-center px-4 py-2 text-sm rounded-lg transition duration-200 ml-4 {{ request()->routeIs('brands.*') ? 'text-blue-600 bg-slate-100' : 'text-slate-600 hover:bg-slate-50' }}">
+                            <span class="w-1 h-1 {{ request()->routeIs('brands.*') ? 'bg-blue-600' : 'bg-slate-400' }} rounded-full mr-3"></span>
+                            <span>Brand</span>
                         </a>
-                        <a href="#" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition duration-200">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <span class="font-medium">Kalender</span>
+                        <a href="{{ route('master.index') }}" class="flex items-center px-4 py-2 text-sm rounded-lg transition duration-200 ml-4 {{ request()->routeIs('master.*') ? 'text-blue-600 bg-slate-100' : 'text-slate-600 hover:bg-slate-50' }}">
+                            <span class="w-1 h-1 {{ request()->routeIs('master.*') ? 'bg-blue-600' : 'bg-slate-400' }} rounded-full mr-3"></span>
+                            <span>Master</span>
                         </a>
-                    </nav>
+                        <a href="{{ route('toko.index') }}" class="flex items-center px-4 py-2 text-sm rounded-lg transition duration-200 ml-4 {{ request()->routeIs('toko.*') ? 'text-blue-600 bg-slate-100' : 'text-slate-600 hover:bg-slate-50' }}">
+                            <span class="w-1 h-1 {{ request()->routeIs('toko.*') ? 'bg-blue-600' : 'bg-slate-400' }} rounded-full mr-3"></span>
+                            <span>Toko</span>
+                        </a>
+                        <a href="{{ route('token.logout') }}" class="flex items-center px-4 py-2 text-sm rounded-lg transition duration-200 ml-4 ">
+                            <span class="w-1 h-1 "></span>
+                            <span>Logout</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- ANALYTICS SECTION -->
-                <div class="mb-8">
-                    <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 px-4">Analytics</h3>
-                    <nav class="space-y-1">
-                        <a href="#" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-xl transition duration-200">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                            <span class="font-medium">Overview</span>
-                        </a>
-                        
-                        <!-- Sub Menu - Reports (Collapsible) -->
-                        <div class="ml-4">
-                            <button onclick="toggleSubMenu('reportsMenu')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 rounded-lg transition duration-200">
-                                <span>Laporan</span>
-                                <svg id="reportsMenu-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                            <div id="reportsMenu" class="mt-2 space-y-1 overflow-hidden transition-max-height max-h-0">
-                                <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-lg transition duration-200 ml-4">
-                                    <span class="w-1 h-1 bg-slate-400 rounded-full mr-3"></span>
-                                    <span>Penjualan</span>
-                                </a>
-                                <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-lg transition duration-200 ml-4">
-                                    <span class="w-1 h-1 bg-slate-400 rounded-full mr-3"></span>
-                                    <span>Pengunjung</span>
-                                </a>
-                                <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-lg transition duration-200 ml-4">
-                                    <span class="w-1 h-1 bg-slate-400 rounded-full mr-3"></span>
-                                    <span>Konversi</span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-
-                <!-- MANAGEMENT SECTION -->
+                <button id="darkToggle" onclick="toggleDarkMode()" 
+                class="relative w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full 
+                       transition-colors duration-300 flex items-center">
+                <span class="absolute w-4 h-4 bg-white rounded-full shadow 
+                             transform transition-transform duration-300 left-0.5 
+                             dark:translate-x-5">
+                </span>
+            </button>
+            </nav>
+        </div>
+        <!-- MANAGEMENT SECTION -->
                 <div class="mb-8">
                     <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 px-4">Management</h3>
                     <nav class="space-y-1">
@@ -165,11 +172,11 @@
                         </a>
                     </nav>
                 </div>
-            </div>
+    </div>
 
-            <div class="p-4 border-t border-slate-200">
-                <div class="flex items-center justify-center">
-                    <p class="text-sm font-semibold text-slate-800">xi</p>
-                </div>
-            </div>
-        </aside>
+    <div class="p-4 border-t border-slate-200">
+        <div class="flex items-center justify-center">
+            <p class="text-sm font-semibold text-slate-800">xi</p>
+        </div>
+    </div>
+</aside>
