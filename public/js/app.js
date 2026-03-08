@@ -172,31 +172,56 @@
             }, 120);
         });  
 
-        const btnOpen = document.getElementById("openSetting");
-        const panel = document.getElementById("settingsPanel");
-        const overlay = document.getElementById("settingsOverlay");
-
-        btnOpen.addEventListener("click", () => {
-            const rect = btnOpen.getBoundingClientRect();
-
-            panel.style.top = rect.top + "px";
-            panel.style.left = rect.right + 12 + "px"; 
-
-            const isOpen = panel.classList.contains("scale-y-100");
-
+        function toggleSubMenu(menuId) {
+            const subMenu = document.getElementById(menuId);
+            const icon = document.getElementById(menuId + '-icon');
+            
+            // Cek apakah submenu sedang terbuka
+            const isOpen = subMenu.classList.contains('max-h-96');
+            
             if (isOpen) {
-                panel.classList.remove("scale-y-100");
-                panel.classList.add("scale-y-0");
-                overlay.classList.add("hidden");
+                // Tutup submenu
+                subMenu.classList.remove('max-h-96');
+                subMenu.classList.add('max-h-0');
+                icon.classList.remove('rotate-180');
             } else {
-                panel.classList.remove("hidden");
-                setTimeout(() => panel.classList.add("scale-y-100"), 10);
-                overlay.classList.remove("hidden");
+                // Buka submenu
+                subMenu.classList.remove('max-h-0');
+                subMenu.classList.add('max-h-96');
+                icon.classList.add('rotate-180');
             }
+        }
+
+        // Buka submenu Pengguna secara default
+        window.addEventListener('load', function() {
+            // Buka submenu Pengguna saat halaman dimuat
+            setTimeout(function() {
+                toggleSubMenu('userMenu');
+            }, 100);
         });
 
-        overlay.addEventListener("click", () => {
-            panel.classList.remove("scale-y-100");
-            panel.classList.add("scale-y-0");
-            overlay.classList.add("hidden");
-        });
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            const icon = document.getElementById('dropdownIcon');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Tutup dropdown jika klik di luar
+        window.onclick = function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const button = document.getElementById('profileButton');
+            const icon = document.getElementById('dropdownIcon');
+            
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+    
