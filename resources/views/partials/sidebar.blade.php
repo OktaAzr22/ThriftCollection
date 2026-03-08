@@ -62,17 +62,23 @@
                             <span class="w-1 h-1 "></span>
                             <span>Logout</span>
                         </a>
+                        <div class="flex items-center justify-between px-4 py-2 ml-4 border-t border-slate-100 mt-2 pt-2">
+                            <span class="text-sm font-medium text-slate-600">Dark Mode</span>
+                            <button id="darkToggle" onclick="toggleDarkMode()" 
+                                class="relative w-12 h-6 bg-gray-300 rounded-full 
+                                       transition-colors duration-300 flex items-center cursor-pointer
+                                       focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <!-- Toggle Ball -->
+                                <span class="absolute w-5 h-5 bg-white rounded-full shadow-md 
+                                             transform transition-transform duration-300 
+                                             left-0.5 dark:translate-x-6">
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <button id="darkToggle" onclick="toggleDarkMode()" 
-                class="relative w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full 
-                       transition-colors duration-300 flex items-center">
-                <span class="absolute w-4 h-4 bg-white rounded-full shadow 
-                             transform transition-transform duration-300 left-0.5 
-                             dark:translate-x-5">
-                </span>
-            </button>
+                
             </nav>
         </div>
         <!-- MANAGEMENT SECTION -->
