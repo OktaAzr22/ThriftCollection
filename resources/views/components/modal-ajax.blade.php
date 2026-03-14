@@ -1,11 +1,13 @@
 @props(['id' => 'modal-ajax', 'title' => 'Detail'])
 
-<!-- OVERLAY -->
-<div id="{{ $id }}" class="fixed inset-0 bg-black/40 hidden flex justify-center items-center z-50">
-    <!-- MODAL BOX -->
-    <div id="{{ $id }}-box" class="bg-white rounded-2xl w-full max-w-3xl shadow-xl overflow-hidden animate-zoomIn">
+<div id="{{ $id }}" 
+     class="fixed inset-0 bg-black/40 hidden flex justify-center items-center z-50
+            transition-opacity duration-300 ease-in-out opacity-0">
 
-        {{-- HEADER --}}
+    <div id="{{ $id }}-box" 
+         class="bg-white rounded-2xl w-full max-w-3xl shadow-xl overflow-hidden
+                transform transition-all duration-300 scale-95">
+
         <div class="flex justify-between items-center p-4 border-b">
             <h2 class="font-semibold text-lg">{{ $title }}</h2>
             <button onclick="tutupModal('{{ $id }}')" class="p-2 rounded-full hover:bg-gray-100">
@@ -13,29 +15,24 @@
             </button>
         </div>
 
-        {{-- Skeleton Loader --}}
         <div id="{{ $id }}-skeleton" class="p-6 animate-pulse space-y-4">
+
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                <!-- Bagian Gambar (Kiri) -->
+
                 <div class="md:col-span-5 space-y-4">
-                    <!-- Gambar produk -->
                     <div class="h-64 md:h-80 bg-gray-300 rounded-xl"></div>
-                    <!-- Info tanggal dan total -->
                     <div class="flex justify-between">
                         <div class="h-8 w-32 bg-gray-300 rounded-full"></div>
                         <div class="h-8 w-24 bg-gray-300 rounded-full"></div>
                     </div>
                 </div>
 
-                <!-- Bagian Detail (Kanan) -->
                 <div class="md:col-span-7 space-y-6">
-                    <!-- Nama Produk -->
                     <div class="border-b pb-4">
                         <div class="h-3 w-16 bg-gray-300 rounded mb-2"></div>
                         <div class="h-5 w-2/3 bg-gray-300 rounded"></div>
                     </div>
 
-                    <!-- Harga dan Ongkir -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <div class="h-3 w-12 bg-gray-300 rounded mb-2"></div>
@@ -47,7 +44,6 @@
                         </div>
                     </div>
 
-                    <!-- Kategori dan Brand -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <div class="h-3 w-16 bg-gray-300 rounded mb-2"></div>
@@ -59,7 +55,6 @@
                         </div>
                     </div>
 
-                    <!-- Warna dan Toko -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <div class="h-3 w-12 bg-gray-300 rounded mb-2"></div>
@@ -71,13 +66,15 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
-        {{-- AJAX CONTENT --}}
         <div id="{{ $id }}-content" class="p-4 hidden max-h-[70vh] overflow-y-auto no-scrollbar"></div>
 
     </div>
+
 </div>
 
 <script>
@@ -88,13 +85,16 @@
         const cont   = document.getElementById(id + "-content");
 
         modal.classList.remove("hidden");
+        void modal.offsetWidth;
 
-        box.classList.remove("animate-zoomOut");
-        box.classList.add("animate-zoomIn");
+        modal.classList.remove("opacity-0");
+
+        box.classList.remove("scale-95");
+        box.classList.add("scale-100");
 
         sk.classList.remove("hidden");
         cont.classList.add("hidden");
-        cont.innerHTML = ""; // Clear content
+        cont.innerHTML = "";
 
         fetch(url)
             .then(res => res.text())
@@ -114,11 +114,14 @@
         const modal = document.getElementById(id);
         const box   = document.getElementById(id + "-box");
 
-        box.classList.remove("animate-zoomIn");
-        box.classList.add("animate-zoomOut");
+        modal.classList.add("opacity-0");
+
+        box.classList.remove("scale-100");
+        box.classList.add("scale-95");
 
         setTimeout(() => {
-            modal.classList.add("hidden");
-        }, 250);
-    }
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+    }, 300);
+}
 </script>

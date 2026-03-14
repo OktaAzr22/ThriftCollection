@@ -135,7 +135,7 @@
                             
                             <!-- Sub Menu - Products -->
                             <div id="productMenu" class="mt-2 space-y-1 overflow-hidden transition-max-height max-h-0">
-                                <div class="ml-4">
+                                <div class="ml-4 border-l border-gray-500">
                                     <h4 class="text-sm font-medium text-slate-500 px-4 mb-2">Manajemen Produk</h4>
                                     <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-lg transition duration-200 ml-4">
                                         <span class="w-1 h-1 bg-slate-400 rounded-full mr-3"></span>
