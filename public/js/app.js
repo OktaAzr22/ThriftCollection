@@ -173,32 +173,32 @@
         });  
 
         function toggleSubMenu(menuId) {
+
             const subMenu = document.getElementById(menuId);
             const icon = document.getElementById(menuId + '-icon');
-            
-            // Cek apakah submenu sedang terbuka
+
+            if (!subMenu || !icon) return;
+
             const isOpen = subMenu.classList.contains('max-h-96');
-            
+
             if (isOpen) {
-                // Tutup submenu
+
                 subMenu.classList.remove('max-h-96');
                 subMenu.classList.add('max-h-0');
-                icon.classList.remove('rotate-180');
+
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+
             } else {
-                // Buka submenu
+
                 subMenu.classList.remove('max-h-0');
                 subMenu.classList.add('max-h-96');
-                icon.classList.add('rotate-180');
+
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+
             }
         }
-
-        // Buka submenu Pengguna secara default
-        window.addEventListener('load', function() {
-            // Buka submenu Pengguna saat halaman dimuat
-            setTimeout(function() {
-                toggleSubMenu('userMenu');
-            }, 100);
-        });
 
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
@@ -213,7 +213,6 @@
             }
         }
 
-        // Tutup dropdown jika klik di luar
         window.onclick = function(event) {
             const dropdown = document.getElementById('dropdownMenu');
             const button = document.getElementById('profileButton');

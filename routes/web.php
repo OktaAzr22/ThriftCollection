@@ -69,3 +69,5 @@ Route::get('/logout-token', function () {
     session()->forget('auth_token');
     return redirect('/')->with('success', 'Token berhasil dihapus.');
 })->name('token.logout');
+
+Route::view('/hak-akses', 'hakakses')->name('hakakses');
