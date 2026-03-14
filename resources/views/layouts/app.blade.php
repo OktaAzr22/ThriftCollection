@@ -37,7 +37,7 @@
     </style>
     
 </head>
-<body class="bg-red-50">
+<body class="bg-red-50 dark:bg-black dark:text-white">
 
     @include('components.alert')
 
