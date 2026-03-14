@@ -3,13 +3,13 @@
 @section('title', 'Tambah Produk Baru')
 
 @section('content')
-<div class="bg-white rounded-lg shadow p-6 mb-8">
+<div class="bg-white dark:bg-black rounded-lg shadow dark:shadow-purple-500/10 p-6 mb-8 border dark:border-purple-500/20">
     <div class="relative mb-8 flex items-center justify-center">
         <a href="{{ route('items.index') }}" 
-            class="absolute left-0 text-gray-600 hover:text-gray-800 text-l">
+            class="absolute left-0 text-gray-600 dark:text-white/60 hover:text-gray-800 dark:hover:text-purple-400 text-l transition">
             <i class="fas fa-arrow-left"></i>
         </a>
-        <h2 class="text-xl font-bold text-gray-900 text-center">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white text-center">
             Buat Item Terbaru
         </h2>
     </div>
@@ -19,26 +19,26 @@
     <div class="max-w-xl mx-auto flex justify-between items-center relative">
 
         <!-- Progress Line -->
-        <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 dark:bg-white/10 -translate-y-1/2 z-0"></div>
         <div id="progressLine"
-             class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-10 transition-all duration-500 ease-in-out"
+             class="absolute top-1/2 left-0 h-1 bg-primary dark:bg-purple-500 -translate-y-1/2 z-10 transition-all duration-500 ease-in-out"
              style="width: 0%">
         </div>
 
         <!-- Steps -->
         <div class="step-item relative z-20 flex flex-col items-center">
-            <div class="step-number w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</div>
-            <span class="mt-2 text-sm font-medium text-primary">Informasi Dasar</span>
+            <div class="step-number w-8 h-8 rounded-full bg-primary dark:bg-purple-500 text-white flex items-center justify-center font-bold">1</div>
+            <span class="mt-2 text-sm font-medium text-primary dark:text-purple-400">Informasi Dasar</span>
         </div>
 
         <div class="step-item relative z-20 flex flex-col items-center">
-            <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">2</div>
-            <span class="mt-2 text-sm font-medium text-gray-500">Kategori & Brand</span>
+            <div class="step-number w-8 h-8 rounded-full bg-gray-200 dark:bg-white/20 text-gray-500 dark:text-white/40 flex items-center justify-center font-bold">2</div>
+            <span class="mt-2 text-sm font-medium text-gray-500 dark:text-white/40">Kategori & Brand</span>
         </div>
 
         <div class="step-item relative z-20 flex flex-col items-center">
-            <div class="step-number w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold">3</div>
-            <span class="mt-2 text-sm font-medium text-gray-500">Gambar & Detail</span>
+            <div class="step-number w-8 h-8 rounded-full bg-gray-200 dark:bg-white/20 text-gray-500 dark:text-white/40 flex items-center justify-center font-bold">3</div>
+            <span class="mt-2 text-sm font-medium text-gray-500 dark:text-white/40">Gambar & Detail</span>
         </div>
 
     </div>
@@ -52,49 +52,49 @@
         
         <!-- Step 1: Informasi Dasar -->
         <div id="step1" class="step-content active">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Informasi Dasar Produk</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Informasi Dasar Produk</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="productName" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk</label>
-                    <input type="text" id="productName" name="nama" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="Masukkan nama produk" value="{{ old('nama') }}">
-                    <div id="error-productName" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                    <label for="productName" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Nama Produk</label>
+                    <input type="text" id="productName" name="nama" class="w-full px-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white dark:placeholder-white/50" placeholder="Masukkan nama produk" value="{{ old('nama') }}">
+                    <div id="error-productName" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                     @error('nama')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
-                    <label for="productPrice" class="block text-sm font-medium text-gray-700 mb-1">Harga Produk</label>
+                    <label for="productPrice" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Harga Produk</label>
                     <div class="relative">
-                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
-                        <input type="number" id="productPrice" name="harga" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="0" value="{{ old('harga') }}">
+                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white/60">Rp</span>
+                        <input type="number" id="productPrice" name="harga" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white" placeholder="0" value="{{ old('harga') }}">
                     </div>
-                    <div id="error-productPrice" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                    <div id="error-productPrice" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                     @error('harga')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
-                    <label for="shippingCost" class="block text-sm font-medium text-gray-700 mb-1">Biaya Pengiriman</label>
+                    <label for="shippingCost" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Biaya Pengiriman</label>
                     <div class="relative">
-                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
-                        <input type="number" id="shippingCost" name="ongkir" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="0" value="{{ old('ongkir') }}">
+                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white/60">Rp</span>
+                        <input type="number" id="shippingCost" name="ongkir" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white" placeholder="0" value="{{ old('ongkir') }}">
                     </div>
-                    <div id="error-shippingCost" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                    <div id="error-shippingCost" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                     @error('ongkir')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="flex items-end">
                     <div class="w-full">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Total Harga</label>
-                        <div class="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
-                            <span id="totalPrice" class="text-lg font-bold text-gray-900">Rp 0</span>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Total Harga</label>
+                        <div class="px-4 py-2 bg-gray-50 dark:bg-black rounded-lg border border-gray-200 dark:border-purple-500/20">
+                            <span id="totalPrice" class="text-lg font-bold text-gray-900 dark:text-white">Rp 0</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="flex justify-end mt-8">
-                <button type="button" id="nextStep1" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                <button type="button" id="nextStep1" class="px-6 py-2 bg-primary dark:bg-purple-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-purple-700 transition-colors duration-200 flex items-center">
                     Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
                 </button>
             </div>
@@ -102,65 +102,65 @@
 
         <!-- Step 2: Kategori & Brand -->
         <div id="step2" class="step-content hidden">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Kategori & Brand Produk</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Kategori & Brand Produk</h3>
             <div class="flex flex-col md:flex-row gap-6">
                 <!-- Kolom Kiri: Dropdown -->
                 <div class="w-full md:w-1/2 space-y-6">
                     <div>
-                        <label for="productBrand" class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-                        <select id="productBrand" name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                        <label for="productBrand" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Brand</label>
+                        <select id="productBrand" name="brand_id" class="w-full px-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white">
                             <option value="">Pilih Brand</option>
                             @foreach($brands as $brand)
                                 <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                             @endforeach
                         </select>
-                        <div id="error-productBrand" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                        <div id="error-productBrand" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                         @error('brand_id')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div>
-                        <label for="productStore" class="block text-sm font-medium text-gray-700 mb-1">Toko</label>
-                        <select id="productStore" name="toko_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                        <label for="productStore" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Toko</label>
+                        <select id="productStore" name="toko_id" class="w-full px-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white">
                             <option value="">Pilih Toko</option>
                             @foreach($tokos as $toko)
                                 <option value="{{ $toko->id }}" {{ old('toko_id') == $toko->id ? 'selected' : '' }}>{{ $toko->nama }}</option>
                             @endforeach
                         </select>
-                        <div id="error-productStore" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                        <div id="error-productStore" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                         @error('toko_id')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div>
-                        <label for="productCategory" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                        <select id="productCategory" name="kategori_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200">
+                        <label for="productCategory" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Kategori</label>
+                        <select id="productCategory" name="kategori_id" class="w-full px-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white">
                             <option value="">Pilih Kategori</option>
                             @foreach($kategoris as $kategori)
                                 <option value="{{ $kategori->id }}" {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>{{ $kategori->nama }}</option>
                             @endforeach
                         </select>
-                        <div id="error-productCategory" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                        <div id="error-productCategory" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                         @error('kategori_id')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
                 
                 <!-- Kolom Kanan: Deskripsi -->
                 <div class="w-full md:w-1/2">
-                    <label for="productDescription" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Produk</label>
-                    <textarea id="productDescription" name="deskripsi" rows="10" class="w-full h-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" placeholder="Tulis deskripsi produk di sini...">{{ old('deskripsi') }}</textarea>
+                    <label for="productDescription" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Deskripsi Produk</label>
+                    <textarea id="productDescription" name="deskripsi" rows="10" class="w-full h-full px-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white dark:placeholder-white/50" placeholder="Tulis deskripsi produk di sini...">{{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
             <div class="flex justify-between mt-8">
-                <button type="button" id="prevStep2" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                <button type="button" id="prevStep2" class="px-6 py-2 text-gray-700 dark:text-white/70 border border-gray-300 dark:border-purple-500/30 rounded-lg hover:bg-gray-50 dark:hover:bg-purple-500/10 transition-colors duration-200 flex items-center">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </button>
-                <button type="button" id="nextStep2" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                <button type="button" id="nextStep2" class="px-6 py-2 bg-primary dark:bg-purple-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-purple-700 transition-colors duration-200 flex items-center">
                     Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
                 </button>
             </div>
@@ -168,33 +168,33 @@
 
         <!-- Step 3: Gambar & Detail -->
         <div id="step3" class="step-content hidden">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Gambar & Detail Produk</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Gambar & Detail Produk</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Kolom Kiri: Gambar -->
                 <div class="space-y-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Unggah Gambar Produk</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Unggah Gambar Produk</label>
                         <div class="relative">
                             <!-- Container untuk upload gambar -->
-                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors duration-200">
+                            <div class="border-2 border-dashed border-gray-300 dark:border-purple-500/30 rounded-lg p-6 text-center hover:border-primary dark:hover:border-purple-500 transition-colors duration-200 dark:bg-black">
                                 <input type="file" id="productImage" name="gambar" class="hidden" accept="image/*">
                                 <div id="imagePreview" class="preview-area flex flex-col items-center justify-center">
                                     <div class="text-center">
-                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
-                                        <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
-                                        <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 dark:text-purple-400 mb-3"></i>
+                                        <p class="text-sm text-gray-500 dark:text-white/60">Klik untuk mengunggah gambar</p>
+                                        <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Tombol hapus gambar (muncul hanya saat ada gambar) -->
-                            <button id="deleteImage" type="button" class="absolute -top-2 -right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-md opacity-0 transition-opacity duration-200">
+                            <button id="deleteImage" type="button" class="absolute -top-2 -right-2 w-8 h-8 bg-red-500 dark:bg-purple-600 text-white rounded-full flex items-center justify-center shadow-md opacity-0 transition-opacity duration-200">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
-                        <div id="error-productImage" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                        <div id="error-productImage" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                         @error('gambar')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -202,18 +202,18 @@
                 <!-- Kolom Kanan: Tanggal & Color -->
                 <div class="space-y-6">
                     <div>
-                        <label for="productDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Produk</label>
-                        <input type="date" id="productDate" name="tanggal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200" value="{{ old('tanggal') }}">
-                        <div id="error-productDate" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                        <label for="productDate" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Tanggal Produk</label>
+                        <input type="date" id="productDate" name="tanggal" class="w-full px-4 py-2 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 dark:bg-black dark:text-white" value="{{ old('tanggal') }}">
+                        <div id="error-productDate" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                         @error('tanggal')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="color" class="block text-sm font-medium text-gray-700 mb-1">Warna</label>
+                        <label for="color" class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-1">Warna</label>
                         <div class="relative">
-                            <select id="color" name="id_color" class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200 appearance-none">
+                            <select id="color" name="id_color" class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-purple-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent transition-colors duration-200 appearance-none dark:bg-black dark:text-white">
                                 <option value="">Pilih Warna</option>
                                 @foreach($colors as $color)
                                     <option value="{{ $color->id_color }}" data-hex="{{ $color->hex }}" {{ old('id_color') == $color->id_color ? 'selected' : '' }}>
@@ -222,17 +222,17 @@
                                 @endforeach
                             </select>
                             <!-- Color Preview -->
-                            <div id="colorPreview" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border border-gray-300"></div>
+                            <div id="colorPreview" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border border-gray-300 dark:border-white/20"></div>
                         </div>
-                        <div id="error-color" class="error-message mt-1 text-sm text-red-600 hidden"></div>
+                        <div id="error-color" class="error-message mt-1 text-sm text-red-600 dark:text-purple-400 hidden"></div>
                         @error('id_color')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            <span class="text-red-500 dark:text-purple-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
             </div>
             <div class="flex justify-between mt-8">
-                <button type="button" id="prevStep3" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                <button type="button" id="prevStep3" class="px-6 py-2 text-gray-700 dark:text-white/70 border border-gray-300 dark:border-purple-500/30 rounded-lg hover:bg-gray-50 dark:hover:bg-purple-500/10 transition-colors duration-200 flex items-center">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </button>
                 <x-button-custom label="Submit" loading="Processing..." />
@@ -315,11 +315,11 @@
             // Update step numbers
             stepNumbers.forEach((number, index) => {
                 if (index < step) {
-                    number.classList.remove('bg-gray-200', 'text-gray-500');
-                    number.classList.add('bg-primary', 'text-white');
+                    number.classList.remove('bg-gray-200', 'text-gray-500', 'dark:bg-white/20', 'dark:text-white/40');
+                    number.classList.add('bg-primary', 'text-white', 'dark:bg-purple-500', 'dark:text-white');
                 } else {
-                    number.classList.remove('bg-primary', 'text-white');
-                    number.classList.add('bg-gray-200', 'text-gray-500');
+                    number.classList.remove('bg-primary', 'text-white', 'dark:bg-purple-500', 'dark:text-white');
+                    number.classList.add('bg-gray-200', 'text-gray-500', 'dark:bg-white/20', 'dark:text-white/40');
                 }
             });
 
@@ -339,8 +339,8 @@
             if (errorElement && inputElement) {
                 errorElement.textContent = message;
                 errorElement.classList.remove('hidden');
-                inputElement.classList.add('border-red-500', 'focus:ring-red-500');
-                inputElement.classList.remove('focus:ring-primary', 'focus:border-transparent');
+                inputElement.classList.add('border-red-500', 'focus:ring-red-500', 'dark:border-purple-400');
+                inputElement.classList.remove('focus:ring-primary', 'focus:border-transparent', 'dark:focus:ring-purple-500');
                 
                 // Scroll ke error
                 inputElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -354,8 +354,8 @@
             if (errorElement && inputElement) {
                 errorElement.classList.add('hidden');
                 errorElement.textContent = '';
-                inputElement.classList.remove('border-red-500', 'focus:ring-red-500');
-                inputElement.classList.add('focus:ring-primary', 'focus:border-transparent');
+                inputElement.classList.remove('border-red-500', 'focus:ring-red-500', 'dark:border-purple-400');
+                inputElement.classList.add('focus:ring-primary', 'focus:border-transparent', 'dark:focus:ring-purple-500');
             }
         }
 
@@ -604,9 +604,9 @@
             function resetImagePreview() {
                 preview.innerHTML = `
                     <div class="text-center">
-                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
-                        <p class="text-sm text-gray-500">Klik untuk mengunggah gambar</p>
-                        <p class="text-xs text-gray-400 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 dark:text-purple-400 mb-3"></i>
+                        <p class="text-sm text-gray-500 dark:text-white/60">Klik untuk mengunggah gambar</p>
+                        <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Format: JPG, PNG, GIF (Maks. 5MB)</p>
                     </div>
                 `;
                 input.value = '';

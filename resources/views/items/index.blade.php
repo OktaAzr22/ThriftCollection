@@ -3,17 +3,17 @@
 @section('content')
                 <x-modal-ajax id="global-modal" title="Detail Item" />
 
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 mt-2">
+                <div class="bg-white dark:bg-black border border-slate-200 dark:border-purple-500/20 rounded-2xl p-6 mt-2">
 
                     <div class="flex items-center justify-between mb-6">
 
-                        <h2 class="text-lg font-semibold text-slate-800">
+                        <h2 class="text-lg font-semibold text-slate-800 dark:text-white">
                             Data Item
                         </h2>
 
                         <div class="flex items-center gap-3">
                             <form method="GET" action="{{ route('items.index') }}" class="relative w-full md:w-64">
-                                <input class="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" 
+                                <input class="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 dark:border-purple-500/30 focus:ring-2 focus:ring-primary dark:focus:ring-purple-500 focus:border-transparent dark:bg-black dark:text-white dark:placeholder-white/50" 
                                     type="text"
                                     id="searchInput"
                                     name="search"
@@ -25,37 +25,37 @@
                                     placeholder="Cari item..."
                                 >
 
-                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400 dark:text-purple-400"></i>
 
                                 @if(request('search'))
                                     <button type="button" data-target-input="#searchInput"
                                     data-base-url="{{ route('items.index') }}"
                                     onclick="clearSearch(this)"
-                                        class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
+                                        class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 dark:text-purple-400 dark:hover:text-purple-300">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 @endif
                             </form>
                             <a href="{{ route('items.create') }}">
-                                <button class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                                    Tambah Toko
+                                <button class="flex items-center gap-2 bg-blue-600 dark:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 dark:hover:bg-purple-700 transition">
+                                    Tambah Item
                                 </button>
                             </a>
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto bg-white border border-slate-200 rounded-2xl mt-5">
+                    <div class="overflow-x-auto bg-white dark:bg-black border border-slate-200 dark:border-purple-500/20 rounded-2xl mt-5">
 
                         @if(request('search'))
-                            <p class="text-sm text-gray-600 mb-3">
+                            <p class="text-sm text-gray-600 dark:text-white/60 mb-3">
                                 Menampilkan hasil untuk: 
-                                <span class="font-semibold">"{{ request('search') }}"</span>
+                                <span class="font-semibold dark:text-white">"{{ request('search') }}"</span>
                             </p>
                         @endif
 
                         <table class="w-full text-sm">
 
-                            <thead class="text-slate-500 border-b">
+                            <thead class="text-slate-500 dark:text-white/60 border-b dark:border-purple-500/20">
 
                                 <tr class="text-left"> 
                                     <th class="py-3 px-4 font-medium">PRODUK</th>
@@ -69,60 +69,60 @@
                             </thead>
 
                             <x-skeleton-table id="itemSkeleton" :cols="6" :rows="5" class="mt-6 w-full" />
-                            <tbody id="tableBody" class="divide-y divide-slate-100">
+                            <tbody id="tableBody" class="divide-y divide-slate-100 dark:divide-purple-500/20">
                                 @if($items->count() > 0)
                                 @forelse ($items as $item)
-                                <tr class="hover:bg-slate-50 transition">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-purple-500/10 transition dark:text-white/80">
 
                                     <td class="py-3 px-4">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0">
+                                            <div class="w-10 h-10 rounded-lg overflow-hidden bg-slate-200 dark:bg-purple-500/20 flex-shrink-0">
 
                                                 @if ($item->gambar)
                                                         <img class="w-full h-full object-cover" src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"> 
                                                 @else
-                                                    <div class="flex-shrink-0 h-10 w-10 rounded-lg overflow-hidden border border-gray-200">
-                                                        <p>None</p>
+                                                    <div class="flex-shrink-0 h-10 w-10 rounded-lg overflow-hidden border border-gray-200 dark:border-purple-500/30 flex items-center justify-center">
+                                                        <span class="text-xs text-gray-400 dark:text-white/40">None</span>
                                                     </div>
                                                 @endif
                                                 
                                             </div>
                                             <div>
-                                                <p class="text-sm font-medium text-slate-800">{{ $item->nama }}</p>
-                                                <p class="text-xs text-slate-500">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d M Y') }}</p>
+                                                <p class="text-sm font-medium text-slate-800 dark:text-white">{{ $item->nama }}</p>
+                                                <p class="text-xs text-slate-500 dark:text-white/50">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d M Y') }}</p>
                                             </div>
                                         </div>
                                     </td>
 
-                                    <td class="py-3 px-3 font-medium text-slate-800 whitespace-nowrap">Rp {{ number_format($item->harga + $item->ongkir, 0, ',', '.') }}</td>
+                                    <td class="py-3 px-3 font-medium text-slate-800 dark:text-white whitespace-nowrap">Rp {{ number_format($item->harga + $item->ongkir, 0, ',', '.') }}</td>
 
                                     <td class="py-3 px-3">
-                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-600 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 whitespace-nowrap">
                                             {{ $item->brand->name }}
                                         </span>
                                     </td>
 
-                                    <td class="py-3 px-3 text-slate-600 whitespace-nowrap">{{ $item->toko->nama }}</td>
+                                    <td class="py-3 px-3 text-slate-600 dark:text-white/70 whitespace-nowrap">{{ $item->toko->nama }}</td>
 
                                     <td class="py-3 px-3">
-                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-600 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-purple-500/20 text-blue-600 dark:text-purple-400 whitespace-nowrap">
                                             {{ $item->kategori->nama }}
                                         </span>
                                     </td>
 
                                     <td class="py-3 px-3">
                                         <div class="flex justify-center gap-2">
-                                            <button onclick="openEditDrawer('{{ route('items.edit', $item->id) }}')" title="edit"  class="w-8 h-8 flex items-center justify-center rounded-md bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                                            <button onclick="openEditDrawer('{{ route('items.edit', $item->id) }}')" title="edit"  class="w-8 h-8 flex items-center justify-center rounded-md bg-slate-100 dark:bg-purple-500/10 text-slate-600 dark:text-purple-400 hover:bg-slate-200 dark:hover:bg-purple-500/20 transition">
                                                 <i class="fa-solid fa-eye text-xs"></i>
                                             </button>
-                                            <button onclick="bukaModal('global-modal', '{{ url('/item/' . $item->id . '/detail') }}')" title="view"  class="w-8 h-8 flex items-center justify-center rounded-md bg-blue-50 text-blue-600 hover:bg-blue-100 transition">
+                                            <button onclick="bukaModal('global-modal', '{{ url('/item/' . $item->id . '/detail') }}')" title="view"  class="w-8 h-8 flex items-center justify-center rounded-md bg-blue-50 dark:bg-purple-500/20 text-blue-600 dark:text-purple-400 hover:bg-blue-100 dark:hover:bg-purple-500/30 transition">
                                                 <i class="fa-solid fa-pen text-xs"></i>
                                             </button>
                                             <button onclick="openDeleteModal(
                                                 '{{ route('items.destroy', $item) }}', 
                                                 'item', 
                                                 '{{ $item->nama }}'
-                                            )" title="delete"  class="w-8 h-8 flex items-center justify-center rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition">
+                                            )" title="delete"  class="w-8 h-8 flex items-center justify-center rounded-md bg-red-50 dark:bg-purple-500/20 text-red-600 dark:text-purple-400 hover:bg-red-100 dark:hover:bg-purple-500/30 transition">
                                                 <i class="fa-solid fa-trash text-xs"></i>
                                             </button>
                                         </div>
@@ -131,14 +131,14 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="10" class="px-6 py-4 text-sm text-center text-gray-500">
-                                        No items found. <a href="{{ route('items.create') }}" class="text-blue-500 hover:text-blue-700">Add your first item</a>
+                                    <td colspan="10" class="px-6 py-4 text-sm text-center text-gray-500 dark:text-white/60">
+                                        No items found. <a href="{{ route('items.create') }}" class="text-blue-500 dark:text-purple-400 hover:text-blue-700 dark:hover:text-purple-300">Add your first item</a>
                                     </td>
                                 </tr>
                                 @endforelse
                                 @else
                                     <tr>
-                                        <td colspan="5" class="py-4 text-center text-red-500 font-semibold">
+                                        <td colspan="5" class="py-4 text-center text-red-500 dark:text-purple-400 font-semibold">
                                             ⚠️ Data tidak ditemukan untuk pencarian:
                                             "<span class="font-bold">{{ request('search') }}</span>"
                                         </td>
@@ -148,25 +148,27 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $items->links() }}
+                    <div class="dark:text-white/70">
+                        {{ $items->links() }}
+                    </div>
                 </div>
 
                 <div id="editDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
                     <!-- Overlay -->
-                    <div class="absolute inset-0 bg-black/50 transition-opacity duration-300"
+                    <div class="absolute inset-0 bg-black/50 dark:bg-black/70 transition-opacity duration-300"
                         onclick="closeEditDrawer()"></div>
 
                     <!-- Drawer Panel -->
-                    <div class="absolute right-0 top-0 h-full w-full md:w-[600px] bg-white shadow-2xl 
+                    <div class="absolute right-0 top-0 h-full w-full md:w-[600px] bg-white dark:bg-black shadow-2xl dark:shadow-purple-500/10 border-l dark:border-purple-500/20
                                 transform translate-x-full transition-transform duration-300 ease-in-out
                                 flex flex-col"
                         id="editDrawerPanel">
 
                         <!-- Header -->
-                        <div class="flex-shrink-0 flex justify-between items-center p-4 md:p-6 border-b border-gray-200">
-                            <h2 class="text-lg md:text-xl font-bold text-gray-800">Edit Item</h2>
+                        <div class="flex-shrink-0 flex justify-between items-center p-4 md:p-6 border-b border-gray-200 dark:border-purple-500/20">
+                            <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">Edit Item</h2>
                             <button onclick="closeEditDrawer()" 
-                                    class="text-gray-600 hover:text-red-500 text-xl md:text-2xl p-1 hover:bg-gray-100 rounded-full transition-colors duration-200">
+                                    class="text-gray-600 dark:text-white/60 hover:text-red-500 dark:hover:text-purple-400 text-xl md:text-2xl p-1 hover:bg-gray-100 dark:hover:bg-purple-500/10 rounded-full transition-colors duration-200">
                                 ✕
                             </button>
                         </div>
@@ -176,8 +178,8 @@
                             <!-- Loading State -->
                             <div class="flex items-center justify-center h-full">
                                 <div class="text-center">
-                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
-                                    <p class="text-gray-500 text-sm">Memuat form...</p>
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary dark:border-purple-500 mx-auto mb-3"></div>
+                                    <p class="text-gray-500 dark:text-white/60 text-sm">Memuat form...</p>
                                 </div>
                             </div>
                         </div>
@@ -202,8 +204,8 @@
                     content.innerHTML = `
                         <div class="flex items-center justify-center h-full">
                             <div class="text-center">
-                                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
-                                <p class="text-gray-500 text-sm">Memuat form...</p>
+                                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary dark:border-purple-500 mx-auto mb-3"></div>
+                                <p class="text-gray-500 dark:text-white/60 text-sm">Memuat form...</p>
                             </div>
                         </div>
                     `;
@@ -220,7 +222,7 @@
                             const form = content.querySelector('form');
                             if (form) {
                                 form.addEventListener('submit', function(e) {
-                                    // Optional: bisa tambahkan AJAX form submission di sini
+                                    // Optional: bisa tambahin AJAX form submission di sini
                                     // atau biarkan form submit seperti biasa
                                 });
                             }
@@ -229,11 +231,11 @@
                             content.innerHTML = `
                                 <div class="flex items-center justify-center h-full">
                                     <div class="text-center p-4">
-                                        <div class="text-red-500 text-4xl mb-3">⚠️</div>
-                                        <p class="text-red-600 font-medium mb-2">Error memuat form</p>
-                                        <p class="text-gray-500 text-sm mb-4">Coba refresh halaman atau cek koneksi internet</p>
+                                        <div class="text-red-500 dark:text-purple-400 text-4xl mb-3">⚠️</div>
+                                        <p class="text-red-600 dark:text-purple-400 font-medium mb-2">Error memuat form</p>
+                                        <p class="text-gray-500 dark:text-white/60 text-sm mb-4">Coba refresh halaman atau cek koneksi internet</p>
                                         <button onclick="closeEditDrawer()" 
-                                                class="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                                                class="px-4 py-2 text-sm bg-gray-100 dark:bg-purple-500/10 hover:bg-gray-200 dark:hover:bg-purple-500/20 rounded-lg transition-colors dark:text-white/80">
                                             Tutup
                                         </button>
                                     </div>
@@ -252,8 +254,8 @@
                         document.getElementById("editDrawerContent").innerHTML = `
                             <div class="flex items-center justify-center h-full">
                                 <div class="text-center">
-                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3"></div>
-                                    <p class="text-gray-500 text-sm">Memuat form...</p>
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary dark:border-purple-500 mx-auto mb-3"></div>
+                                    <p class="text-gray-500 dark:text-white/60 text-sm">Memuat form...</p>
                                 </div>
                             </div>
                         `;
