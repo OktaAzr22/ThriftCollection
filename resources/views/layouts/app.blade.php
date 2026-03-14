@@ -34,6 +34,50 @@
         .transition-rotate {
             transition: transform 0.3s ease;
         }
+
+        /*  */
+        /* Untuk Webkit browser (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 10px;  /* Lebar scrollbar vertikal */
+    height: 10px; /* Tinggi scrollbar horizontal */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Warna track */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* Warna thumb */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Warna thumb saat hover */
+}
+
+/* Untuk dark mode */
+.dark ::-webkit-scrollbar-track {
+    background: #1a1a1a; /* Hitam gelap */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #6B21A5; /* Ungu */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #8b5cf6; /* Ungu lebih terang */
+}
+
+/* Untuk Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.dark * {
+    scrollbar-color: #6B21A5 #1a1a1a;
+}
     </style>
     
 </head>

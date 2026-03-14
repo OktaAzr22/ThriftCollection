@@ -4,12 +4,12 @@
 
 @section('content')
 
-<div class="bg-white rounded-lg shadow p-6 mb-4">
+<div class="bg-white dark:bg-black rounded-lg shadow dark:shadow-purple-500/10 p-6 mb-4 border dark:border-purple-500/20">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <h2 class="text-lg font-bold text-gray-900">Data Pengiriman</h2>
+        <h2 class="text-lg font-bold text-gray-900 dark:text-white">Data Pengiriman</h2>
         <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto items-center">
             <form method="GET" action="{{ route('toko.index') }}" class="relative flex justify-end w-full md:w-auto">
-                <input class="px-10 py-2 text-sm border border-gray-300 rounded-lg bg-white  focus:outline-none focus:ring-0  focus:border-primary transition-all duration-300 ease-in-out w-4/5 md:w-48 origin-right focus:w-full md:focus:w-64" 
+                <input class="px-10 py-2 text-sm border border-gray-300 dark:border-purple-500/30 rounded-lg bg-white dark:bg-black focus:outline-none focus:ring-0 focus:border-primary dark:focus:border-purple-500 transition-all duration-300 ease-in-out w-4/5 md:w-48 origin-right focus:w-full md:focus:w-64 dark:text-white dark:placeholder-white/50" 
                     type="text"
                     id="searchInput"
                     name="search"
@@ -21,66 +21,66 @@
                     placeholder="Cari data..."
                 >
 
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-purple-400"></i>
 
                 @if(request('search'))
                     <button type="button" data-target-input="#searchInput"
                     data-base-url="{{ route('toko.index') }}"
                     onclick="clearSearch(this)"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-purple-400 dark:hover:text-purple-300 cursor-pointer">
                         <i class="fas fa-times"></i>
                     </button>
                 @endif
             </form>
 
             <button onclick="openModal('modalTambahToko')" 
-                    class="px-3 py-2 bg-primary text-white rounded-lg">
+                    class="px-3 py-2 bg-primary dark:bg-purple-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-purple-700 transition">
                 + Tambah Toko
             </button>
         </div>
     </div>
 
     @if(request('search'))
-        <div class="mb-4 text-sm text-gray-700">
+        <div class="mb-4 text-sm text-gray-700 dark:text-white/60">
             Hasil pencarian untuk: 
-            <span class="font-semibold text-gray-900">"{{ request('search') }}"</span>
+            <span class="font-semibold text-gray-900 dark:text-white">"{{ request('search') }}"</span>
         </div>
     @endif
 
     <div class="overflow-x-auto rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-purple-500/20">
+            <thead class="bg-gray-50 dark:bg-purple-500/10">
                 <tr>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Asal</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Deskripsi</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ongkir</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-white/60 uppercase">Nama</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-white/60 uppercase">Asal</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-white/60 uppercase">Deskripsi</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-white/60 uppercase">Ongkir</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-white/60 uppercase">Action</th>
                 </tr>
             </thead>
 
             <x-skeleton-table id="tokoSkeleton" :cols="5" :rows="1" class="mt-6 w-full" />
 
-            <tbody id="tableBody"  class="bg-white divide-y divide-gray-200">
+            <tbody id="tableBody" class="bg-white dark:bg-black divide-y divide-gray-200 dark:divide-purple-500/20">
                 @if($tokos->count() > 0)
                     @forelse ($tokos as $toko)
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-purple-500/10 transition">
                             <td class="px-4 py-4">
-                                <div class="text-sm font-medium text-gray-900">{{ $toko->nama }}</div>
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $toko->nama }}</div>
                             </td>
 
                             <td class="px-4 py-4">
-                                <div class="text-sm text-gray-900">{{ $toko->asal }}</div>
+                                <div class="text-sm text-gray-900 dark:text-white/80">{{ $toko->asal }}</div>
                             </td>
 
                             <td class="px-4 py-4">
-                                <div class="text-sm text-gray-900 max-w-xs truncate">
+                                <div class="text-sm text-gray-900 dark:text-white/80 max-w-xs truncate">
                                     {{ $toko->deskripsi ?? '-' }}
                                 </div>
                             </td>
 
                             <td class="px-4 py-4">
-                                <div class="text-sm font-medium text-gray-900">
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">
                                     {{ number_format($toko->items_max_ongkir ?? 0, 0, ',', '.') }}
                                 </div>
                             </td>
@@ -88,7 +88,7 @@
                             <td class="px-4 py-4">
                                 <div class="flex space-x-2">
                                     <button onclick="openModal('modalEditToko{{ $toko->id }}')" 
-                                            class="text-blue-600 hover:text-blue-900">
+                                            class="text-blue-600 dark:text-purple-400 hover:text-blue-900 dark:hover:text-purple-300">
                                         <i class="fas fa-edit"></i>
                                     </button>
 
@@ -97,18 +97,18 @@
                                                 'toko', 
                                                 '{{ $toko->nama }}'
                                             )"
-                                            class="text-red-600 hover:text-red-900">
+                                            class="text-red-600 dark:text-purple-400 hover:text-red-900 dark:hover:text-purple-300">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="5" class="text-center py-4">Tidak ada data toko.</td></tr>
+                        <tr><td colspan="5" class="text-center py-4 dark:text-white/60">Tidak ada data toko.</td></tr>
                     @endforelse
                 @else
                     <tr>
-                        <td colspan="5" class="py-4 text-center text-red-500 font-semibold">
+                        <td colspan="5" class="py-4 text-center text-red-500 dark:text-purple-400 font-semibold">
                             ⚠️ Data tidak ditemukan untuk pencarian:
                             "<span class="font-bold">{{ request('search') }}</span>"
                         </td>
@@ -116,7 +116,7 @@
                 @endif
             </tbody>
         </table>
-        <div class="mt-4">
+        <div class="mt-4 dark:text-white/70">
             {{ $tokos->links() }}
         </div>
     </div>
@@ -132,26 +132,28 @@
     action="{{ route('toko.store') }}">
 
     <div class="mb-4 mt-3">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Toko</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Nama Toko</label>
         <input type="text" name="nama"
-            class="w-full px-3 py-2 border rounded-lg" placeholder="Masukkan Nama Toko.."
+            class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50" 
+            placeholder="Masukkan Nama Toko.."
             value="{{ old('nama') }}" required>
-        @error('nama') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror
+        @error('nama') <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p> @enderror
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Asal Toko</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Asal Toko</label>
         <input type="text" name="asal"
-            class="w-full px-3 py-2 border rounded-lg" placeholder="Masukkan Asal..."
+            class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50" 
+            placeholder="Masukkan Asal..."
             value="{{ old('asal') }}" required>
-        @error('asal') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror
+        @error('asal') <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p> @enderror
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi (Opsional)</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Deskripsi (Opsional)</label>
         <textarea name="deskripsi" rows="3" placeholder="Masukkan Deskripsi Toko..."
-            class="w-full px-3 py-2 border rounded-lg">{{ old('deskripsi') }}</textarea>
-        @error('deskripsi') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror
+            class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50">{{ old('deskripsi') }}</textarea>
+        @error('deskripsi') <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p> @enderror
     </div>
     {{--  --}}
     
@@ -182,30 +184,30 @@
     @endphp
 
     <div class="mb-4 mt-3">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Toko</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Nama Toko</label>
         <input type="text"
                name="nama"
-               class="w-full px-3 py-2 border rounded-lg"
+               class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50"
                value="{{ $isEditError ? old('nama') : $toko->nama }}"
                required>
-        @if ($isEditError) @error('nama') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror @endif
+        @if ($isEditError) @error('nama') <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p> @enderror @endif
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Asal</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Asal</label>
         <input type="text"
                name="asal"
-               class="w-full px-3 py-2 border rounded-lg"
+               class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50"
                value="{{ $isEditError ? old('asal') : $toko->asal }}"
                required>
-        @if ($isEditError) @error('asal') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror @endif
+        @if ($isEditError) @error('asal') <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p> @enderror @endif
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Deskripsi</label>
         <textarea name="deskripsi" rows="3" placeholder="Deskripsi Toko ..."
-            class="w-full px-3 py-2 border rounded-lg">{{ $isEditError ? old('deskripsi') : $toko->deskripsi }}</textarea>
-        @if ($isEditError) @error('deskripsi') <p class="text-red-500 text-xs">{{ $message }}</p> @enderror @endif
+            class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50">{{ $isEditError ? old('deskripsi') : $toko->deskripsi }}</textarea>
+        @if ($isEditError) @error('deskripsi') <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p> @enderror @endif
     </div>
 
 </x-modal>

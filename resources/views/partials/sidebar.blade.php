@@ -58,10 +58,6 @@
                             <span class="w-1 h-1 {{ request()->routeIs('toko.*') ? 'bg-blue-600 dark:bg-purple-400' : 'bg-slate-400 dark:bg-white/40' }} rounded-full mr-3"></span>
                             <span>Toko</span>
                         </a>
-                        <a href="{{ route('token.logout') }}" class="flex items-center px-4 py-2 text-sm rounded-lg transition duration-200 ml-4 text-slate-600 dark:text-white/70 hover:bg-slate-50 dark:hover:bg-purple-500/10">
-                            <span class="w-1 h-1 bg-slate-400 dark:bg-white/40 rounded-full mr-3"></span>
-                            <span>Logout</span>
-                        </a>
                         <div class="flex items-center justify-between px-4 py-2 ml-4 border-t border-slate-100 dark:border-purple-500/20 mt-2 pt-2">
                             <span class="text-sm font-medium text-slate-600 dark:text-white">Dark Mode</span>
                             <button id="darkToggle" onclick="toggleDarkMode()" 
@@ -161,9 +157,12 @@
 
                 <!-- SETTINGS SECTION -->
                 <div>
-                    <h3 class="text-xs font-semibold text-slate-400 dark:text-white/50 uppercase tracking-wider mb-4 px-4">Settings</h3>
+                    <h3 class="text-xs font-semibold text-slate-400 dark:text-white/50 uppercase tracking-wider mb-4 px-4 ">Settings</h3>
                     <nav class="space-y-1">
-                        <a href="#" class="flex items-center px-4 py-3 text-slate-600 dark:text-white/80 hover:bg-slate-50 dark:hover:bg-purple-500/10 rounded-xl transition duration-200">
+                        
+                        
+                        <div class="    rounded-xl transition duration-200 border-t border-slate-100 dark:border-purple-500/20 ">
+                        <a href="#" class="flex items-center px-4 py-3 text-slate-600 dark:text-white/80 hover:bg-slate-50 dark:hover:bg-purple-500/10 rounded-xl transition duration-200 ">
                             <svg class="w-5 h-5 mr-3 dark:text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -176,8 +175,18 @@
                             </svg>
                             <span class="font-medium">Keamanan</span>
                         </a>
+                        <a href="{{ route('token.logout') }}" 
+                           class="flex items-center px-4 py-3 text-slate-600 dark:text-white/80 hover:bg-slate-50 dark:hover:bg-purple-500/10 rounded-xl transition duration-200 ">
+                            <svg class="w-5 h-5 mr-3 dark:text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                            <span class="font-medium text-red-600 dark:text-purple-400">Logout</span>
+                        </a>
+                        </div>
+                        
                     </nav>
                 </div>
+
     </div>
 
     <div class="p-4 border-t border-slate-200 dark:border-purple-500/20">

@@ -2,24 +2,24 @@
 
 @section('content')
 
-<div class="bg-white rounded-lg shadow p-6 mb-8">
-    <h2 class="text-lg font-bold text-gray-900 mb-6">Manajemen Data</h2>
+<div class="bg-white dark:bg-black rounded-lg shadow dark:shadow-purple-500/10 p-6 mb-8 border dark:border-purple-500/20">
+    <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-6">Manajemen Data</h2>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-md font-semibold text-gray-800">Kategori</h3>
+                <h3 class="text-md font-semibold text-gray-800 dark:text-white">Kategori</h3>
 
                 <button onclick="openModal('modalTambahKategori')"
-                    class="px-3 py-1 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center text-sm">
+                    class="px-3 py-1 bg-primary dark:bg-purple-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-purple-700 transition-colors duration-200 flex items-center text-sm">
                     <i class="fas fa-plus mr-1"></i> Tambah
                 </button>
             </div>
 
-            <div class="overflow-x-auto rounded-lg border border-gray-200 max-h-80 overflow-y-auto no-scrollbar">
+            <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-purple-500/20 max-h-80 overflow-y-auto no-scrollbar">
             <table class="min-w-full border-collapse">
-                <thead class="sticky top-0 z-10 bg-white dark:bg-gray-900">
-                    <tr class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                <thead class="sticky top-0 z-10 bg-white dark:bg-black">
+                    <tr class="bg-gray-100 dark:bg-purple-500/10 text-gray-700 dark:text-white/80">
                         <th class="px-5 py-3 text-left text-sm font-semibold">
                             Nama Kategori
                         </th>
@@ -31,12 +31,12 @@
                     </tr>
                 </thead>
 
-                <tbody class="text-gray-600 dark:text-gray-300">
+                <tbody class="text-gray-600 dark:text-white/70">
                     @foreach ($kategoris as $kategori)
-                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-purple-500/10 transition-colors duration-150">
 
                             <td class="px-4 py-3">
-                                <div class="text-sm font-medium text-gray-900">
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">
                                     {{ $kategori->nama }}
                                 </div>
                             </td>
@@ -47,7 +47,7 @@
 
                                     {{-- Edit --}}
                                     <button onclick="openModal('modalEditKategori-{{ $kategori->id }}')"
-                                        class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded transition-colors duration-200">
+                                        class="p-2 text-blue-600 dark:text-purple-400 hover:text-blue-900 dark:hover:text-purple-300 hover:bg-blue-50 dark:hover:bg-purple-500/20 rounded transition-colors duration-200">
                                         <i class="fas fa-edit"></i>
                                     </button>
 
@@ -57,7 +57,7 @@
                                             'kategori',
                                             '{{ $kategori->nama }}'
                                         )"
-                                        class="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded transition-colors duration-200">
+                                        class="p-2 text-red-600 dark:text-purple-400 hover:text-red-900 dark:hover:text-purple-300 hover:bg-red-50 dark:hover:bg-purple-500/20 rounded transition-colors duration-200">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
 
@@ -76,18 +76,18 @@
         <div>
 
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-md font-semibold text-gray-800">Warna</h3>
+                <h3 class="text-md font-semibold text-gray-800 dark:text-white">Warna</h3>
 
                 <button onclick="openModal('modalTambahWarna')"
-                    class="px-3 py-1 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center text-sm">
+                    class="px-3 py-1 bg-primary dark:bg-purple-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-purple-700 transition-colors duration-200 flex items-center text-sm">
                     <i class="fas fa-plus mr-1"></i> Tambah
                 </button>
             </div>
 
-            <div class="overflow-x-auto rounded-lg border border-gray-200 max-h-80 overflow-y-auto no-scrollbar">
+            <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-purple-500/20 max-h-80 overflow-y-auto no-scrollbar">
                 <table class="min-w-full border-collapse">
-                    <thead class="sticky top-0 z-10 bg-white dark:bg-gray-900">
-                        <tr class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <thead class="sticky top-0 z-10 bg-white dark:bg-black">
+                        <tr class="bg-gray-100 dark:bg-purple-500/10 text-gray-700 dark:text-white/80">
                             <th class="px-4 py-3"></th>
 
                             <th class="px-5 py-3 text-left text-sm font-semibold">
@@ -101,19 +101,19 @@
                         </tr>
                     </thead>
 
-                    <tbody class="text-gray-600 dark:text-gray-300">
+                    <tbody class="text-gray-600 dark:text-white/70">
                         @foreach ($colors as $color)
-                            <tr class="hover:bg-gray-50 transition-colors duration-150">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-purple-500/10 transition-colors duration-150">
 
                                 {{-- Kolom Bagan Warna --}}
                                 <td class="px-4 py-3">
-                                    <div class="w-6 h-6 rounded border border-gray-300"
+                                    <div class="w-6 h-6 rounded border border-gray-300 dark:border-purple-500/30"
                                         style="background: {{ $color->hex }}"></div>
                                 </td>
 
                                 {{-- Nama Warna --}}
                                 <td class="px-4 py-3">
-                                    <div class="text-sm font-medium text-gray-900">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white">
                                         {{ $color->nama }}
                                     </div>
                                 </td>
@@ -124,7 +124,7 @@
 
                                         {{-- Edit --}}
                                         <button onclick="openModal('modalEditWarna-{{ $color->id_color }}')"
-                                            class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded transition-colors duration-200">
+                                            class="p-2 text-blue-600 dark:text-purple-400 hover:text-blue-900 dark:hover:text-purple-300 hover:bg-blue-50 dark:hover:bg-purple-500/20 rounded transition-colors duration-200">
                                             <i class="fas fa-edit"></i>
                                         </button>
 
@@ -134,7 +134,7 @@
                                                 'warna',
                                                 '{{ $color->nama }}'
                                             )"
-                                            class="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded transition-colors duration-200">
+                                            class="p-2 text-red-600 dark:text-purple-400 hover:text-red-900 dark:hover:text-purple-300 hover:bg-red-50 dark:hover:bg-purple-500/20 rounded transition-colors duration-200">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
 
@@ -159,24 +159,24 @@
 <x-modal id="modalTambahWarna" title="Tambah Warna Baru" action="{{ route('master.color.store') }}">
 
     <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">Nama Warna</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Nama Warna</label>
 
-        <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg"
+        <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50"
             value="{{ old('nama') }}" required placeholder="Masukkan Nama Warna">
 
         @error('nama')
-            <p class="text-red-500 text-xs">{{ $message }}</p>
+            <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p>
         @enderror
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">Pilih Warna</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Pilih Warna</label>
 
-        <input type="color" name="hex" class="w-full px-3 py-2 border rounded-lg"
+        <input type="color" name="hex" class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white"
             value="{{ old('hex', '#000000') }}">
 
         @error('hex')
-            <p class="text-red-500 text-xs">{{ $message }}</p>
+            <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p>
         @enderror
     </div>
 
@@ -191,14 +191,14 @@
         action="{{ route('master.color.update', $color->id_color) }}" method="PUT">
 
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-2">Nama Warna</label>
-            <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg"
+            <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Nama Warna</label>
+            <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50"
                 value="{{ $color->nama }}" required>
         </div>
 
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-2">Pilih Warna</label>
-            <input type="color" name="hex" class="w-full px-3 py-2 border rounded-lg"
+            <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Pilih Warna</label>
+            <input type="color" name="hex" class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white"
                 value="{{ $color->hex }}" required>
         </div>
 
@@ -212,13 +212,13 @@
 <x-modal id="modalTambahKategori" title="Tambah Kategori Baru" action="{{ route('master.kategori.store') }}">
 
     <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kategori</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Nama Kategori</label>
 
-        <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg"
+        <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50"
             value="{{ old('nama') }}" required placeholder="Masukkan Nama Kategori">
 
         @error('nama')
-            <p class="text-red-500 text-xs">{{ $message }}</p>
+            <p class="text-red-500 dark:text-purple-400 text-xs">{{ $message }}</p>
         @enderror
     </div>
 
@@ -233,8 +233,8 @@
         action="{{ route('master.kategori.update', $kategori->id) }}" method="PUT">
 
         <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kategori</label>
-            <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg"
+            <label class="block text-sm font-medium text-gray-700 dark:text-white/80 mb-2">Nama Kategori</label>
+            <input type="text" name="nama" class="w-full px-3 py-2 border rounded-lg dark:bg-black dark:border-purple-500/30 dark:text-white dark:placeholder-white/50"
                 value="{{ $kategori->nama }}" required>
         </div>
 

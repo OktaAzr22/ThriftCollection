@@ -5,7 +5,7 @@
     $border = $color ?? '#D1D5DB';
 @endphp
 
-<span class="inline-flex w-fit items-center px-3 py-1.5 text-xs rounded-md font-medium"
+<span class="inline-flex w-fit items-center px-3 py-1.5 text-xs rounded-md font-medium dark:bg-purple-500/20 dark:text-purple-400 dark:border-purple-500/30"
       style="
         background-color: {{ $bg }};
         color: {{ $text }};
