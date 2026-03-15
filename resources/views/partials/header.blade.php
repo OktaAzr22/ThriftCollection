@@ -17,7 +17,7 @@
 
                 <div onclick="toggleDropdown()" class="flex items-center space-x-3 cursor-pointer" id="profileButton">
                     <div class="text-right">
-                        <p class="text-sm font-semibold text-slate-800 dark:text-white">Ahmad Fauzi</p>
+                        <p class="text-sm font-semibold text-slate-800 dark:text-white">{{ session('nama') }}</p>
                         <p class="text-xs text-slate-500 dark:text-white/70">Administrator</p>
                     </div>
                     <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-purple-600 dark:to-purple-800 rounded-xl flex items-center justify-center text-white font-semibold">

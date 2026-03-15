@@ -2,73 +2,85 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akses Terbatas</title>
+    <title>Guest Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <div class="min-h-screen flex flex-col items-center justify-center px-6">
+    <div class="bg-white shadow-xl rounded-2xl p-12 text-center w-full max-w-2xl">
 
-        {{-- Card --}}
-        <div class="bg-white shadow-lg rounded-2xl p-8 max-w-lg w-full text-center">
-            
-            {{-- Icon --}}
-            <div class="flex justify-center mb-4">
-                <div class="bg-red-100 text-red-600 p-4 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                         class="h-10 w-10" 
-                         fill="none" viewBox="0 0 24 24" 
-                         stroke="currentColor">
-                        <path stroke-linecap="round" 
-                              stroke-linejoin="round" 
-                              stroke-width="2" 
-                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 
-                                 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 
-                                 1.333.192 3 1.732 3z" />
-                    </svg>
-                </div>
-            </div>
+        <!-- Label -->
+        <span class="inline-flex items-center gap-2 
+             bg-gradient-to-r from-purple-500 to-indigo-500 
+             text-white px-5 py-2 
+             rounded-full text-sm font-semibold 
+             shadow-md mb-6">
 
-            {{-- Text --}}
-            <h1 class="text-2xl font-semibold mb-2">Akses Terbatas</h1>
+    <!-- Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="w-4 h-4"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
 
-            <p class="text-gray-600 mb-6">
-                Token Anda tidak memiliki izin untuk mengakses halaman premium.
-            </p>
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 7l9-4 9 4-9 4-9-4zM3 17l9 4 9-4M3 12l9 4 9-4"/>
+    </svg>
 
-            {{-- Error message (if any) --}}
-            @if (session('error'))
-                <div class="bg-red-100 text-red-600 p-3 rounded-lg text-sm mb-4">
-                    {{ session('error') }}
-                </div>
-            @endif
+    Thrifting
 
-            {{-- Buttons --}}
-            <div class="flex flex-col gap-3">
+</span>
 
-                {{-- Tombol Kembali ke Input Token --}}
-                <a href="{{ route('token.form') }}"
-                    class="w-full text-center bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition">
-                    Masukkan Token Baru
-                </a>
+        <!-- Selamat datang -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">
+            Selamat datang, {{ session('nama') }}
+        </h1>
 
-                {{-- Logout Token --}}
-                <a href="{{ route('token.logout') }}"
-                    class="w-full text-center bg-gray-200 text-gray-700 py-2.5 rounded-lg hover:bg-gray-300 transition">
-                    Hapus Token
-                </a>
-
-            </div>
-
-        </div>
-
-        {{-- Footer --}}
-        <p class="text-sm text-gray-500 mt-6">
-            © {{ date('Y') }} Thriftting Dashboard
+        <!-- Status -->
+        <p class="text-gray-500 mb-10 text-lg">
+            Anda masuk sebagai <span class="font-semibold">Guest</span>
         </p>
 
+        <!-- Logout Icon -->
+        <div class="relative group inline-flex flex-col items-center">
+
+    <!-- Button -->
+    <a href="{{ route('token.logout') }}"
+       class="flex items-center justify-center 
+              w-12 h-12 
+              rounded-full 
+              bg-red-500 text-white 
+              hover:bg-red-600 hover:scale-110
+              transition duration-300">
+
+        <!-- Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="w-6 h-6 group-hover:animate-bounce"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+
+    </a>
+
+    <!-- Tooltip -->
+    <span class="absolute -bottom-8 
+                 opacity-0 group-hover:opacity-100
+                 bg-black text-white text-xs
+                 px-3 py-1 rounded-md
+                 transition duration-300">
+        Logout
+    </span>
+
+</div>
     </div>
 
 </body>
