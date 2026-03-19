@@ -1,17 +1,38 @@
 @props([
     'id' => 'loadingSkeleton',
-    'cols' => 4,
-    'rows' => 8,
+    'rows' => 5,
 ])
 
-<tbody id="{{ $id }}" {{ $attributes->merge(['class' => 'hidden']) }} class="hidden animate-pulse">
+<tbody id="{{ $id }}" {{ $attributes->merge(['class' => 'hidden']) }}>
     @for ($i = 0; $i < $rows; $i++)
-        <tr class="bg-gray-100 dark:bg-purple-500/5 border-b dark:border-purple-500/10">
-            @for ($j = 0; $j < $cols; $j++)
-                <td class="px-6 py-4">
-                    <div class="h-4 bg-gray-300 dark:bg-purple-500/30 rounded"></div>
-                </td>
-            @endfor
-        </tr>
+        {{ $slot }}
     @endfor
 </tbody>
+
+<style>
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(200,200,200,0.2);
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+</style>

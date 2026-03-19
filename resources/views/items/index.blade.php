@@ -43,15 +43,16 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="overflow-x-auto bg-white dark:bg-black border border-slate-200 dark:border-purple-500/20 rounded-2xl mt-5">
-
-                        @if(request('search'))
+                    @if(request('search'))
                             <p class="text-sm text-gray-600 dark:text-white/60 mb-3">
                                 Menampilkan hasil untuk: 
                                 <span class="font-semibold dark:text-white">"{{ request('search') }}"</span>
                             </p>
                         @endif
+
+                    <div class="overflow-x-auto bg-white dark:bg-black border border-slate-200 dark:border-purple-500/20 rounded-2xl mt-5">
+
+                        
 
                         <table class="w-full text-sm">
 
@@ -68,7 +69,58 @@
 
                             </thead>
 
-                            <x-skeleton-table id="itemSkeleton" :cols="6" :rows="5" class="mt-6 w-full" />
+                            
+                            <x-skeleton-table id="itemSkeleton" :rows="3">
+
+<tr class="border-b dark:border-purple-500/10">
+
+    <!-- PRODUK -->
+    <td class="py-3 px-4">
+        <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 rounded-lg skeleton"></div>
+
+            <div class="space-y-2">
+                <div class="h-4 w-32 skeleton rounded"></div>
+                <div class="h-3 w-20 skeleton rounded opacity-60"></div>
+            </div>
+
+        </div>
+    </td>
+
+    <!-- HARGA -->
+    <td class="py-3 px-3">
+        <div class="h-4 w-20 skeleton rounded"></div>
+    </td>
+
+    <!-- BRAND -->
+    <td class="py-3 px-3">
+        <div class="h-5 w-20 rounded-full skeleton"></div>
+    </td>
+
+    <!-- STORE -->
+    <td class="py-3 px-3">
+        <div class="h-4 w-28 skeleton rounded"></div>
+    </td>
+
+    <!-- KATEGORI -->
+    <td class="py-3 px-3">
+        <div class="h-5 w-24 rounded-full skeleton"></div>
+    </td>
+
+    <!-- ACTION -->
+    <td class="py-3 px-3">
+        <div class="flex justify-center gap-2">
+            <div class="w-8 h-8 skeleton rounded-md"></div>
+            <div class="w-8 h-8 skeleton rounded-md"></div>
+            <div class="w-8 h-8 skeleton rounded-md"></div>
+        </div>
+    </td>
+
+</tr>
+
+</x-skeleton-table>
+
                             <tbody id="tableBody" class="divide-y divide-slate-100 dark:divide-purple-500/20">
                                 @if($items->count() > 0)
                                 @forelse ($items as $item)

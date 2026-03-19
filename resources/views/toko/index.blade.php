@@ -59,7 +59,44 @@
                 </tr>
             </thead>
 
-            <x-skeleton-table id="tokoSkeleton" :cols="5" :rows="1" class="mt-6 w-full" />
+            
+            <x-skeleton-table id="tokoSkeleton" :rows="3">
+
+                            <tr class="border-b dark:border-purple-500/10">
+
+                                <!-- ICON -->
+                                <td class="py-3 px-4">
+                                    <div class="w-10 h-10 rounded-lg skeleton"></div>
+                                </td>
+
+                                <!-- NAMA -->
+                                <td class="py-3 space-y-2">
+                                    <div class="h-4 w-32 rounded skeleton"></div>
+                                    <div class="h-3 w-20 rounded skeleton opacity-60"></div>
+                                </td>
+
+                                <!-- ASAL -->
+                                <td class="py-3">
+                                    <div class="h-4 w-40 rounded skeleton"></div>
+                                </td>
+
+                                <!-- ITEM -->
+                                <td class="py-3">
+                                    <div class="h-4 w-10 rounded skeleton"></div>
+                                </td>
+
+                                <!-- ACTION -->
+                                <td class="py-3">
+                                    <div class="flex justify-center gap-2">
+                                        <div class="w-8 h-8 rounded-md skeleton"></div>
+                                        <div class="w-8 h-8 rounded-md skeleton"></div>
+                                        <div class="w-8 h-8 rounded-md skeleton"></div>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            </x-skeleton-table>
 
             <tbody id="tableBody" class="bg-white dark:bg-black divide-y divide-gray-200 dark:divide-purple-500/20">
                 @if($tokos->count() > 0)

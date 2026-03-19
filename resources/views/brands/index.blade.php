@@ -75,9 +75,36 @@
                                 </tr>
 
                             </thead>
-                            <x-skeleton-table id="brandSkeleton" :cols="5" :rows="5" class="mt-6 w-full" />
 
-                            
+                           <x-skeleton-table id="brandSkeleton" :rows="3">
+                            <tr class="border-b dark:border-purple-500/10">
+                                <td class="py-3 px-4">
+                                    <div class="w-10 h-10 rounded-lg skeleton"></div>
+                                </td>
+
+                                <td class="py-3 space-y-2">
+                                    <div class="h-4 w-32 rounded skeleton"></div>
+                                    <div class="h-3 w-20 rounded skeleton opacity-60"></div>
+                                </td>
+
+                                <td class="py-3">
+                                    <div class="h-4 w-40 rounded skeleton"></div>
+                                </td>
+
+                                <td class="py-3">
+                                    <div class="h-4 w-10 rounded skeleton"></div>
+                                </td>
+
+                                <td class="py-3">
+                                    <div class="flex justify-center gap-2">
+                                        <div class="w-8 h-8 rounded-md skeleton"></div>
+                                        <div class="w-8 h-8 rounded-md skeleton"></div>
+                                        <div class="w-8 h-8 rounded-md skeleton"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                           </x-skeleton-table>
+
                             <tbody class="divide-y divide-slate-200 dark:divide-purple-500/20" id="tableBody">
 
                                 @if($brands->count() > 0)
